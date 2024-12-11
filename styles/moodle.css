@@ -1,0 +1,215 @@
+/* From Uiverse.io by Custyyyy */
+.my-btn {
+    height: 25px;
+    /* width: 40px; */
+    width: 25px;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 5px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    /* font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-size: 18px;
+    font-weight: 700;
+    justify-content: center;
+    /* line-height: 1.25; */
+    /* min-height: 3rem; */
+    /* padding: calc(.875rem - 1px) calc(1.5rem - 1px); */
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    /* width: auto; */
+}
+
+.my-btn:hover,
+.my-btn:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.my-btn:hover {
+    transform: translateY(-1px);
+}
+
+.my-btn:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+#outer {
+    width: 320px;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.del-btn {
+    padding-left: 9.5px;
+    padding-right: 9.5px;
+    padding-bottom: 2.5px;
+}
+
+.add-btn {
+    padding-left: 6.5px;
+}
+
+.ez-class-p,
+.ez-class-span {
+    margin-left: 5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashed-line {
+    border-top: 1px dashed #000;
+    width: 100%;
+    margin: 15px 0 10px 0;
+}
+
+
+
+/* Course Page CSS */
+.course_text {
+    height: 30px;
+    margin: 5px 7px;
+    padding-inline: 10px;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 5px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    overflow: hidden;
+}
+
+
+
+.course_text:hover {
+    transform: translateY(-1px);
+    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 8px 0;
+
+}
+
+
+
+#psb_list_div {
+    overflow: hidden;
+    transition: 0.3s ease-out;
+    display: flex;                  /* 使用 Flexbox */
+    flex-direction: column;         /* 垂直排列 */
+    align-items: center;
+    margin-top: 5px;    
+}
+
+#course_list_div{
+    display: flex;                  /* 使用 Flexbox */
+    flex-direction: column;         /* 垂直排列 */
+    align-items: center;
+}
+
+
+#ez-moodle-help {
+    /* position: relative;
+    display: inline-block; */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+}
+
+/* test */
+.card-class{
+    display: inline;
+}
+
+.card-class p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #666;
+}
+
+.card-class p.small {
+    font-size: 14px;
+}
+
+.go-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    border-radius: 0 4px 0 35px;
+}
+
+.go-arrow {
+    margin-top: -11px;
+    margin-right: -8px;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.card2 {
+    display: block;
+    top: 0px;
+    position: relative;
+    /* width: 100%; */
+    max-width: 180px;
+    min-width: 140px;
+    background-color: #f8faff;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 8px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+    border: 1px solid #f8faff;
+    transition: all 0.2s ease-out;
+}
+
+#reset{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transform-origin: center;
+}
+
+#reset:hover {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.ez-pp{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,47 @@
+/* nice layout for li items */
+.linkWithImage {
+    width: 90%;
+    padding: 6px 12px;
+    margin: auto;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    /* rounded */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    /* shadow */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.075);
+
+    /* transition */
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.linkWithImage:hover {
+    background-color: #eee;
+    /* scale */
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+
+.ezhku-active{
+    background-color: #99C555;
+}
+
+.ezhku-active:hover{
+    background-color: #ff4545;
+}
+
+@keyframes ez-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
