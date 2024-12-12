@@ -101,7 +101,7 @@ function SetUserForm (custom, inner) {
                     style : textInputStyle
                 }),
                 window.elements.Button({
-                    id: "submit",
+                    id: "fasthku-submit",
                     type: "submit",
                     innerText: "Save",
                     style: {
