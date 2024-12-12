@@ -160,6 +160,13 @@ window.elements.H2 = function (custom, inner) {
     });
 };
 
+window.elements.H3 = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let h3Container = document.createElement("h3");
+        return h3Container;
+    });
+};
+
 window.elements.A = function (custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {
         let aContainer = document.createElement("a");
