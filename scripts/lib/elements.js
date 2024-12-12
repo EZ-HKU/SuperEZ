@@ -54,6 +54,9 @@ window.elements.Container = function (custom, inner) {
             width: "30%",
             minWidth: "300px",
             transition: "all 0.3s ease",
+            boxSizing: "border-box",
+            fontFamily: "sans-serif",
+            fontSize: "14px",
         });
 
         return container;
@@ -157,6 +160,13 @@ window.elements.H2 = function (custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {
         let h2Container = document.createElement("h2");
         return h2Container;
+    });
+};
+
+window.elements.H3 = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let h3Container = document.createElement("h3");
+        return h3Container;
     });
 };
 

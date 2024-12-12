@@ -12,7 +12,7 @@ if (!window.popup) {
 }
 
 function CourseBtn(course, custom, inner) {
-    return window.ezReact.createElement(custom, inner, function() {
+    return window.ezReact.createElement(custom, inner, function () {
         var tempDiv = document.createElement("div");
         var newText = document.createElement("div");
         var del_btn = document.createElement("div");
@@ -34,8 +34,7 @@ function CourseBtn(course, custom, inner) {
                     psb_list_div.appendChild(psb_course);
                     chrome.storage.sync.set({ psb_list: psb_list });
                 }
-                chrome.storage.sync.set({ course_code_list: course_code_list, change_flag: true });
-            });
+            );
         };
         newText.innerText = course.title;
         newText.setAttribute('title', course.title);
@@ -45,9 +44,8 @@ function CourseBtn(course, custom, inner) {
     });
 }
 
-
 async function updateCourseBtnList() {
-    let course_list_div = document.getElementById('course_list_div');
+    let course_list_div = document.getElementById("course_list_div");
     if (!course_list_div) {
         return;
     }
@@ -55,30 +53,27 @@ async function updateCourseBtnList() {
     course_list_div.parentNode.replaceChild(course_list, course_list_div);
 }
 
-
 async function CourseBtnList(custom, inner) {
     let data = await window.utils.getStorage(["course_code_list"]);
 
     if (!data.course_code_list) {
-        return (
-            window.elements.Div({id: "course_list_div"})
-        )
+        return window.elements.Div({ id: "course_list_div" });
     }
-    
-    let course_code_list = window.courseType.courseCodeListFromStorage(data.course_code_list);
+
+    let course_code_list = window.courseType.courseCodeListFromStorage(
+        data.course_code_list
+    );
     let courses = course_code_list.getAllCourses();
-    return (
-        window.elements.Div({
-            id: "course_list_div"
+    return window.elements.Div(
+        {
+            id: "course_list_div",
         },
-            courses.map(course => CourseBtn(course, custom, inner))
-        )
-    )
+        courses.map((course) => CourseBtn(course, custom, inner))
+    );
 }
 
-
 function CourseAddBtn(course, custom, inner) {
-    return window.ezReact.createElement(custom, inner, function() {
+    return window.ezReact.createElement(custom, inner, function () {
         var psb_div = document.createElement("div");
         var pp = document.createElement("div");
         pp.classList.add("ez-class-p");
@@ -87,31 +82,43 @@ function CourseAddBtn(course, custom, inner) {
         psb_div.appendChild(pp);
         psb_div.classList.add("psb-div");
         psb_div.style.margin = "5px 0";
-        psb_div.setAttribute('title', course.title);
+        psb_div.setAttribute("title", course.title);
         psb_div.addEventListener("click", function () {
             var course_list_div = document.getElementById("course_list_div");
             var psb_list_div = document.getElementById("psb_list_div");
-            chrome.storage.sync.get(["course_code_list", "psb_list"], (data) => {
-                var course_code_list = window.courseType.courseCodeListFromStorage(data.course_code_list);
-                var psb_list = window.courseType.courseCodeListFromStorage(data.psb_list);
-                course_code_list.addCourse(course);
-                psb_list_div.removeChild(psb_div);
+            chrome.storage.sync.get(
+                ["course_code_list", "psb_list"],
+                (data) => {
+                    var course_code_list =
+                        window.courseType.courseCodeListFromStorage(
+                            data.course_code_list
+                        );
+                    var psb_list = window.courseType.courseCodeListFromStorage(
+                        data.psb_list
+                    );
+                    course_code_list.addCourse(course);
+                    psb_list_div.removeChild(psb_div);
 
-                psb_list.removeCourseByTitle(course.title);
+                    psb_list.removeCourseByTitle(course.title);
 
-                // add_course(course);
-                let course_btn = CourseBtn(course, custom, inner);
-                course_list_div.appendChild(course_btn);
+                    // add_course(course);
+                    let course_btn = CourseBtn(course, custom, inner);
+                    course_list_div.appendChild(course_btn);
 
-                chrome.storage.sync.set({ course_code_list: course_code_list, change_flag: true, psb_list: psb_list });
-            });
+                    chrome.storage.sync.set({
+                        course_code_list: course_code_list,
+                        change_flag: true,
+                        psb_list: psb_list,
+                    });
+                }
+            );
         });
         return psb_div;
     });
 }
 
 async function updateCourseAddBtnList() {
-    let psb_list_div = document.getElementById('psb_list_div');
+    let psb_list_div = document.getElementById("psb_list_div");
     if (!psb_list_div) {
         return;
     }
@@ -121,58 +128,72 @@ async function updateCourseAddBtnList() {
 
 async function CourseAddBtnList(custom, inner) {
     let data = await window.utils.getStorage(["psb_list"]);
+    async function sendOpenPopupOnStart() {
+        return new Promise((resolve, reject) => {
+            chrome.runtime.sendMessage({
+                type: "SET_OPEN_POPUP_ON_MOODLE_START",
+            });
+            resolve(true);
+        });
+    }
+
     if (data.psb_list) {
-        let psb_list = window.courseType.courseCodeListFromStorage(data.psb_list);
+        let psb_list = window.courseType.courseCodeListFromStorage(
+            data.psb_list
+        );
         let courses = psb_list.getAllCourses();
-        return (
-            window.elements.Div({
-                id: "psb_list_div"
+        return window.elements.Div(
+            {
+                id: "psb_list_div",
             },
-                courses.map(course => CourseAddBtn(course, custom, inner))
-            )
-        )
+            courses.map((course) => CourseAddBtn(course, custom, inner))
+        );
     } else {
-        return (
-            window.elements.Div({
-                id: "psb_list_div"
-            },[
-                window.elements.Div({
-                    className: "psb-div",
-                    style: {
-                        margin: "5px 0"
+        return window.elements.Div(
+            {
+                id: "psb_list_div",
+            },
+            [
+                window.elements.Div(
+                    {
+                        className: "psb-div",
+                        style: {
+                            margin: "5px 0",
+                        },
+                        OnClick: async function () {
+                            await sendOpenPopupOnStart();
+                            window.location.href = "https://moodle.hku.hk/";
+                        },
+
                     },
-                    OnClick: function () {
-                        window.location.href = "https://moodle.hku.hk/";
-                    }
-                },[
-                    window.elements.P({
-                        className: "pp",
-                        innerText: "Get my courses"
-                    })
-                ]
-                )
-            ])
-        )
+                    [
+                        window.elements.P({
+                            className: "pp",
+                            innerText: "Get my courses",
+                        }),
+                    ]
+                ),
+            ]
+        );
     }
 }
 
-
-
-window.popup.MoodlePopup = async function() {
-    return (
-        window.elements.Div({
-            id: "outer"
-        },[
+window.popup.MoodlePopup = async function () {
+    return window.elements.Div(
+        {
+            id: "outer",
+        },
+        [
             window.elements.H1({
-                style: {marginTop: "0px"},
-                innerText: "mO.odle"
+                style: { marginTop: "0px" },
+                innerText: "mO.odle",
             }),
             await CourseBtnList(),
             window.elements.Div({ className: "dashed-line" }),
             await CourseAddBtnList(),
             window.elements.Div({
                 title: "reset the possible course list",
-                style: {padding: "5px 0", width: "15px", marginLeft: "10px"},
+                style: { padding: "5px 0", width: "15px", marginLeft: "10px" },
                 innerHTML: `
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15" id="reset">
                     <path
@@ -180,12 +201,11 @@ window.popup.MoodlePopup = async function() {
                         filter="url(#shadow)" />
                 </svg>`,
                 OnClick: function () {
-                    chrome.storage.sync.remove('psb_list', function () {
+                    chrome.storage.sync.remove("psb_list", function () {
                         updateCourseAddBtnList();
                     });
-                }
+                },
             }),
-
-        ])
-    )
-}
+        ]
+    );
+};
