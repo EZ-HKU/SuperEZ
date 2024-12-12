@@ -54,6 +54,9 @@ window.elements.Container = function (custom, inner) {
             width: "30%",
             minWidth: "300px",
             transition: "all 0.3s ease",
+            boxSizing: "border-box",
+            fontFamily: "sans-serif",
+            fontSize: "14px",
         });
 
         return container;
