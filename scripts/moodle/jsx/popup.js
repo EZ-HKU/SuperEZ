@@ -19,27 +19,36 @@ function CourseBtn(course, custom, inner) {
         tempDiv.classList.add("ez-class-div");
         newText.classList.add("ez-class-span");
         del_btn.innerText = "-";
-        del_btn.classList.add("ez-my-btn")
+        del_btn.classList.add("ez-my-btn");
         del_btn.onclick = function () {
             var course_list_div = document.getElementById("course_list_div");
             var psb_list_div = document.getElementById("psb_list_div");
-            chrome.storage.sync.get(["course_code_list", "psb_list"], (data) => {
-                var course_code_list = window.courseType.courseCodeListFromStorage(data.course_code_list);
-                course_code_list.removeCourseByTitle(course.title);
-                course_list_div.removeChild(tempDiv);
-                if (data.psb_list) {
-                    let psb_list = window.courseType.courseCodeListFromStorage(data.psb_list);
-                    psb_list.addCourse(course);
-                    let psb_course = CourseAddBtn(course, custom, inner);
-                    psb_list_div.appendChild(psb_course);
-                    chrome.storage.sync.set({ psb_list: psb_list });
+            chrome.storage.sync.get(
+                ["course_code_list", "psb_list"],
+                (data) => {
+                    var course_code_list =
+                        window.courseType.courseCodeListFromStorage(
+                            data.course_code_list
+                        );
+                    course_code_list.removeCourseByTitle(course.title);
+                    course_list_div.removeChild(tempDiv);
+                    if (data.psb_list) {
+                        let psb_list =
+                            window.courseType.courseCodeListFromStorage(
+                                data.psb_list
+                            );
+                        psb_list.addCourse(course);
+                        let psb_course = CourseAddBtn(course, custom, inner);
+                        psb_list_div.appendChild(psb_course);
+                        chrome.storage.sync.set({ psb_list: psb_list });
+                    }
                 }
             );
         };
         newText.innerText = course.title;
-        newText.setAttribute('title', course.title);
-        tempDiv.appendChild(newText)
-        tempDiv.appendChild(del_btn)
+        newText.setAttribute("title", course.title);
+        tempDiv.appendChild(newText);
+        tempDiv.appendChild(del_btn);
         return tempDiv;
     });
 }
@@ -164,7 +173,6 @@ async function CourseAddBtnList(custom, inner) {
                             await sendOpenPopupOnStart();
                             window.location.href = "https://moodle.hku.hk/";
                         },
-
                     },
                     [
                         window.elements.P({
