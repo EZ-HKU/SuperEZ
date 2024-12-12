@@ -158,7 +158,7 @@ async function CourseAddBtnList(custom, inner) {
     async function sendOpenPopupOnStart() {
         return new Promise((resolve, reject) => {
             chrome.runtime.sendMessage({
-                type: "SET_OPEN_POPUP_ON_START",
+                type: "SET_OPEN_POPUP_ON_MOODLE_START",
             });
             resolve(true);
         });

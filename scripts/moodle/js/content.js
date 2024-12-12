@@ -245,7 +245,7 @@ function CourePage_handler() {
 
 function popupOnStart() {
     chrome.runtime.sendMessage({
-        type: 'GET_OPEN_POPUP_ON_START'
+        type: 'GET_OPEN_POPUP_ON_MOODLE_START'
     }).then(async (response) => {
         if (response) {
             window.utils.setPopup(await window.popup.MoodlePopup());
