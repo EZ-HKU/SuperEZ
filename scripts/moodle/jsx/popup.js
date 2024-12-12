@@ -176,7 +176,7 @@ async function CourseAddBtnList(custom, inner) {
                     },
                     [
                         window.elements.P({
-                            className: "pp",
+                            className: "ez-class-p",
                             innerText: "Get my courses",
                         }),
                     ]
