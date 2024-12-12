@@ -191,7 +191,7 @@ function CourePage_handler() {
             text.style.marginInline = "10px";
             text.setAttribute("title", course.title);
             div.appendChild(text);
-            div.classList.add("course_text");
+            div.classList.add("psb-div");
             div.addEventListener("click", () => {
                 window.location.href = course.url;
             });
@@ -210,7 +210,7 @@ function CourePage_handler() {
         if (!course_code_list.findCourseByTitle(currentCourse)) {
             var add_button = document.createElement("div");
             add_button.textContent = "Add this course";
-            add_button.classList.add("course_text");
+            add_button.classList.add("psb-div");
             add_button.addEventListener("click", () => {
                 course_code_list.addCourse(
                     new window.courseType.Course(
@@ -229,7 +229,7 @@ function CourePage_handler() {
         } else {
             var remove_button = document.createElement("div");
             remove_button.textContent = "Remove this course";
-            remove_button.classList.add("course_text");
+            remove_button.classList.add("psb-div");
             remove_button.addEventListener("click", () => {
                 course_code_list.deleteCourseByTitle(currentCourse);
                 chrome.storage.sync.set({ course_code_list: course_code_list });
