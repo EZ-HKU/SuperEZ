@@ -57,7 +57,7 @@ function SetUserForm (custom, inner) {
 
         let saved = await saveUser(username, password);
         if (saved) {
-            window.utils.setPopup(await window.popup.FastHKUPopup());
+            window.utils.setPopup(await window.popup.UserPopup());
         } else {
             alert("Username or password is empty.");
         }
@@ -124,15 +124,27 @@ function SetUserForm (custom, inner) {
 }
 
 
+function SettingBlock(name, element) {
+    return window.elements.Div({
+        className: "ez-setting-block",
+        style: {
+            margin: "10px 0",
+        },
+    }, [
+        window.elements.H3({
+            innerText: name,
+        }),
+        element,
+    ]);
+}
+
+
 window.popup.SettingPopup = async function SettingPopup(custom, inner) {
     return (
         window.elements.Div({
-            id: "SettingPopup-container"
+            id: "ez-SettingPopup-container"
         },[
-            window.elements.H1({
-                innerText: "Set User",
-            }),
-            SetUserForm()
+            SettingBlock("Set User", SetUserForm()),
         ]
         )
     )
