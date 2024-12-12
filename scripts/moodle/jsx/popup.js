@@ -14,18 +14,12 @@ if (!window.popup) {
 function CourseBtn(course, custom, inner) {
     return window.ezReact.createElement(custom, inner, function() {
         var tempDiv = document.createElement("div");
-        var newText = document.createElement("span");
-        var del_btn = document.createElement("button");
+        var newText = document.createElement("div");
+        var del_btn = document.createElement("div");
+        tempDiv.classList.add("ez-class-div");
         newText.classList.add("ez-class-span");
-        tempDiv.style.height = "30px";
-        tempDiv.style.width = "280px"
-        tempDiv.style.display = "flex";
-        tempDiv.style.justifyContent = "space-between";
-        tempDiv.style.alignItems = "center";
         del_btn.innerText = "-";
-        del_btn.style.marginLeft = "auto";
-        del_btn.classList.add("my-btn")
-        del_btn.classList.add("del-btn")
+        del_btn.classList.add("ez-my-btn")
         del_btn.onclick = function () {
             var course_list_div = document.getElementById("course_list_div");
             var psb_list_div = document.getElementById("psb_list_div");
@@ -35,23 +29,15 @@ function CourseBtn(course, custom, inner) {
                 course_list_div.removeChild(tempDiv);
                 if (data.psb_list) {
                     let psb_list = window.courseType.courseCodeListFromStorage(data.psb_list);
-
                     psb_list.addCourse(course);
-
-                    // add_psb_course(course);
                     let psb_course = CourseAddBtn(course, custom, inner);
                     psb_list_div.appendChild(psb_course);
-
                     chrome.storage.sync.set({ psb_list: psb_list });
                 }
                 chrome.storage.sync.set({ course_code_list: course_code_list, change_flag: true });
             });
         };
         newText.innerText = course.title;
-        newText.style.whiteSpace = "nowrap";
-        newText.style.overflow = "hidden";
-        newText.style.textOverflow = "ellipsis";
-        newText.style.marginRight = "15px";
         newText.setAttribute('title', course.title);
         tempDiv.appendChild(newText)
         tempDiv.appendChild(del_btn)
@@ -94,12 +80,12 @@ async function CourseBtnList(custom, inner) {
 function CourseAddBtn(course, custom, inner) {
     return window.ezReact.createElement(custom, inner, function() {
         var psb_div = document.createElement("div");
-        var pp = document.createElement("p");
+        var pp = document.createElement("div");
         pp.classList.add("ez-class-p");
         pp.classList.add("ez-pp");
         pp.innerText = course.title;
         psb_div.appendChild(pp);
-        psb_div.classList.add("course_text");
+        psb_div.classList.add("psb-div");
         psb_div.style.margin = "5px 0";
         psb_div.setAttribute('title', course.title);
         psb_div.addEventListener("click", function () {
@@ -151,7 +137,7 @@ async function CourseAddBtnList(custom, inner) {
                 id: "psb_list_div"
             },[
                 window.elements.Div({
-                    className: "course_text",
+                    className: "psb-div",
                     style: {
                         margin: "5px 0"
                     },
