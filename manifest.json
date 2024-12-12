@@ -10,24 +10,23 @@
     {
       "matches": [
         "https://lib.hku.hk/hkulauth*", 
-        "https://hkuportal.hku.hk/cas/login*",
         "https://moodle.hku.hk/*",
         "https://adfs.connect.hku.hk/*",
-        "https://hkuportal.hku.hk/login.html",
-        "https://hkuportal.hku.hk/cas/aad*",
-        "https://moodle.hku.hk/",
-        "https://moodle.hku.hk/course/view.php?id=*",
-        "https://moodle.hku.hk/my/courses.php",
-        "https://moodle.hku.hk/mod/*/view.php?id=*"
+        "https://hkuportal.hku.hk/*",
+        "https://sis-eportal.hku.hk/*",
+        "https://booking.lib.hku.hk/*"
       ],
       "js": [
         "scripts/lib/ezReact.js",
         "scripts/lib/elements.js",
         "scripts/lib/utils.js",
         "scripts/fasthku/jsx/popup.js",
-        "scripts/fasthku/jsx/setting.js",
         "scripts/moodle/jsx/popup.js",
-        "scripts/moodle/js/courseType.js"
+        "scripts/moodle/js/courseType.js",
+        "scripts/setting/jsx/Setting.js",
+        "scripts/navigator/utils.js",
+        "scripts/navigator/Navigator.js"
+
       ],
       "css": [
         "styles/navigator.css",
@@ -36,24 +35,7 @@
       ],
       "run_at": "document_start"
     },
-    {
-      
-      "matches": [
-        "https://lib.hku.hk/hkulauth*", 
-        "https://hkuportal.hku.hk/cas/login*",
-        "https://moodle.hku.hk/*",
-        "https://adfs.connect.hku.hk/*",
-        "https://hkuportal.hku.hk/login.html",
-        "https://hkuportal.hku.hk/cas/aad*",
-        "https://moodle.hku.hk/",
-        "https://moodle.hku.hk/course/view.php?id=*",
-        "https://moodle.hku.hk/my/courses.php",
-        "https://moodle.hku.hk/mod/*/view.php?id=*"
-      ],
-      "js": [
-        "scripts/Navigator.js"
-      ]
-    },
+
 
 
     {
@@ -66,8 +48,7 @@
         "https://hkuportal.hku.hk/cas/aad*"
       ],
       "js": [
-        "scripts/fasthku/js/functions.js" ,
-        "scripts/fasthku/jsx/Loading.js"
+        "scripts/fasthku/js/functions.js"
       ],
       "run_at": "document_start"
     },

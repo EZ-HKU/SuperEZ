@@ -27,7 +27,7 @@ window.elements.Overlay = function (custom, inner) {
             width: "100%",
             height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
-            backdropFilter: "blur(5px)",
+            // backdropFilter: "blur(5px)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -52,6 +52,8 @@ window.elements.Container = function (custom, inner) {
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
             zIndex: "10000",
             width: "30%",
+            minWidth: "300px",
+            transition: "all 0.3s ease",
         });
 
         return container;
@@ -75,6 +77,7 @@ window.elements.ContainerWithOverlay = function (containerCustom,custom, inner) 
                 zIndex: "9999",
                 transition: "all 0.4s ease",
                 visibility: "hidden",
+                opacity: 0,
             }
         }, [
             window.elements.Overlay(custom),
@@ -82,6 +85,31 @@ window.elements.ContainerWithOverlay = function (containerCustom,custom, inner) 
         ]);
     });
 };
+
+window.elements.LoadingOverlay = function(custom, inner) {
+    // create overlay
+    return (
+        window.elements.Overlay({id: 'ezhku-loading-overlay'}, [
+            window.elements.Container({id: 'ezhku-loading-container'},[
+                window.elements.Text('FastHKU', {
+                    style: {
+                        fontSize: '24px',
+                        fontWeight: '600',
+                        marginBottom: '10px'
+                    }
+                }),
+                window.elements.Text('Please waiting...', {
+                    id: 'ezhku-loading-message',
+                    style: {
+                        fontSize: '18px',
+                        marginBottom: '10px'
+                    }
+                }),
+                window.elements.Spinner({id: 'ezhku-loading-spinner'}, null)
+            ])
+        ])
+    );
+}
 
 window.elements.Spinner = function (custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {

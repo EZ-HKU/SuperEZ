@@ -79,7 +79,7 @@ async function LinkList(custom, inner) {
 }
 
 
-window.popup.FastHKUPopup = async function FastHKUPopup(custom, inner) {
+window.popup.UserPopup = async function UserPopup(custom, inner) {
     return (
         window.elements.Div({
             id: "FastHKUPopup-container"
@@ -89,8 +89,8 @@ window.popup.FastHKUPopup = async function FastHKUPopup(custom, inner) {
                 style: {
                     float: "right",
                 },
-                onClick: function () {
-                    window.utils.setPopup(window.popup.SetUserForm());
+                onClick: async function () {
+                    window.utils.setPopup(await window.popup.SettingPopup());
                 },
             },[
                 window.elements.Img({
