@@ -49,7 +49,7 @@ async function saveUser(username, password) {
     return await result;
 }
 
-window.popup.SetUserForm = function (custom, inner) {
+function SetUserForm (custom, inner) {
     async function onSubmit(e) {
         e.preventDefault();
         var username = document.getElementById("fasthku-username").value;
@@ -80,9 +80,6 @@ window.popup.SetUserForm = function (custom, inner) {
     }
 
     return window.elements.Div(null, [
-        window.elements.H1({
-            innerText: "Set User",
-        }),
         window.elements.Form(
             {
                 id: "fasthku-setUser",
@@ -124,4 +121,19 @@ window.popup.SetUserForm = function (custom, inner) {
             ]
         ),
     ]);
+}
+
+
+window.popup.SettingPopup = async function SettingPopup(custom, inner) {
+    return (
+        window.elements.Div({
+            id: "SettingPopup-container"
+        },[
+            window.elements.H1({
+                innerText: "Set User",
+            }),
+            SetUserForm()
+        ]
+        )
+    )
 }

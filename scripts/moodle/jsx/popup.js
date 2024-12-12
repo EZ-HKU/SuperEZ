@@ -186,7 +186,7 @@ window.popup.MoodlePopup = async function() {
             await CourseAddBtnList(),
             window.elements.Div({
                 title: "reset the possible course list",
-                style: {padding: "5px 0"},
+                style: {padding: "5px 0", width: "15px", marginLeft: "10px"},
                 innerHTML: `
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15" id="reset">
                     <path
@@ -199,14 +199,6 @@ window.popup.MoodlePopup = async function() {
                     });
                 }
             }),
-            window.elements.Div({
-                style: {marginTop: "20px", textAlign: "right"},
-            },[
-                window.elements.A({
-                    innerText: "Feedback",
-                    href: "https://github.com/Karis004/mO.odle"
-                })
-            ])
 
         ])
     )

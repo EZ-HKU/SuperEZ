@@ -1,4 +1,16 @@
-window.fastHKUshowLoading();
+// window.fastHKUshowLoading();
+
+
+function fastHKUshowLoading() {
+    window.navigatorUtils.customizeCenter({
+        style: {
+            backgroundColor: "#87CEEB",
+            visibility: "visible",
+            opacity: "1",
+        },
+        innerText: "🤖",
+    })
+}
 
 let url = window.location.href;
 
@@ -6,6 +18,7 @@ if (
     url.includes("https://hkuportal.hku.hk/cas/login") ||
     url.includes("https://hkuportal.hku.hk/login.html")
 ) {
+    fastHKUshowLoading();
     function setTimeStamp() {
         time_object = new Date();
         time =
@@ -36,6 +49,8 @@ if (
         }
     });
 } else if (url.includes("https://lib.hku.hk/hkulauth")) {
+    fastHKUshowLoading();
+
     window.fastHKUTryLogin(function (data) {
         var userid = document.getElementsByName("userid")[0];
         var password = document.getElementsByName("password")[0];
@@ -50,6 +65,8 @@ if (
         }
     });
 } else if (url.includes("https://moodle.hku.hk/login/index.php")) {
+    fastHKUshowLoading();
+
     let button = document.getElementsByClassName(
         "btn login-identityprovider-btn btn-success"
     )[0];
@@ -58,7 +75,6 @@ if (
         button.click();
     }
 } else if (url === "https://moodle.hku.hk/") {
-    window.fastHKUhideLoading();
     try {
         // check if user is logged in
         if (
@@ -66,7 +82,7 @@ if (
         ) {
             // user is not logged in
             // redirect to login page "https://moodle.hku.hk/login/index.php"
-            window.fastHKUshowLoading();
+            fastHKUshowLoading();
 
             document.location.href = "https://moodle.hku.hk/login/index.php";
         }
@@ -76,6 +92,8 @@ if (
         console.log("User is already logged in");
     }
 } else if (url.includes("https://hkuportal.hku.hk/cas/aad")) {
+    fastHKUshowLoading();
+
     window.fastHKUTryLogin(function (data) {
         let email = data.username + "@connect.hku.hk";
         let emailInput = document.getElementById("email");
@@ -85,6 +103,8 @@ if (
         }
     });
 } else if (url.includes("https://adfs.connect.hku.hk/adfs/ls")) {
+    fastHKUshowLoading();
+
     window.fastHKUTryLogin(function (data) {
         var userNameInput = document.getElementById("userNameInput");
         var passwordInput = document.getElementById("passwordInput");
@@ -95,5 +115,3 @@ if (
         }
     });
 }
-
-// window.fastHKUhideLoading();
