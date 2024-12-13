@@ -122,15 +122,15 @@ function init() {
             },
         },
         {
-            content: "📅",
-            onClick: function () {
-                window.location.href = "/calendar";
-            },
-        },
-        {
             content: "⚙️",
             onClick: async function () {
                 window.utils.setPopup(await window.popup.SettingPopup());
+            },
+        },
+        {
+            content: "❓",
+            onClick: async function () {
+                window.utils.setPopup(await window.popup.HelpPopup());
             },
         },
     ];
