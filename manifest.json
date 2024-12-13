@@ -24,9 +24,9 @@
         "scripts/moodle/jsx/popup.js",
         "scripts/moodle/js/courseType.js",
         "scripts/setting/jsx/Setting.js",
+        "scripts/help/jsx/Help.js",
         "scripts/navigator/utils.js",
         "scripts/navigator/Navigator.js"
-
       ],
       "css": [
         "styles/navigator.css",
