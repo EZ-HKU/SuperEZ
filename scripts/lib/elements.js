@@ -138,6 +138,7 @@ window.elements.Spinner = function (custom, inner) {
 window.elements.Div = function (custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {
         let divContainer = document.createElement("div");
+        divContainer.style.boxSizing = "border-box";
         return divContainer;
     });
 };

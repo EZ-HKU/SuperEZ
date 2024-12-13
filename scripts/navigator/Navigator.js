@@ -15,16 +15,21 @@ function NavigatorBtn(btn, custom, inner) {
 }
 
 function Navigator(btns, centerCustom, custom, inner) {
-    if (!document.querySelector("#ez-navigator")) {
-        document.documentElement.appendChild(
-            window.elements.Div({ id: "ez-navigator" })
-        );
-    }
-    var container = document.querySelector("#ez-navigator");
+    // if (!document.querySelector("#ez-navigator")) {
+    //     document.documentElement.appendChild(
+    //         window.elements.Div({ 
+    //             id: "ez-navigator",
+    //             style: {
+    //                 userSelect: "none",
+    //             }
+    //          })
+    //     );
+    // }
+    // var container = document.querySelector("#ez-navigator");
     const radius = 90;
     const containerWidth = 90;
 
-    document.documentElement.removeChild(container);
+    // document.documentElement.removeChild(container);
     if (centerCustom) {
         centerCustom.id = "ez-navigator-center";
     } else {

@@ -13,42 +13,50 @@ if (!window.popup) {
 
 function CourseBtn(course, custom, inner) {
     return window.ezReact.createElement(custom, inner, function () {
-        var tempDiv = document.createElement("div");
-        var newText = document.createElement("div");
-        var del_btn = document.createElement("div");
-        tempDiv.classList.add("ez-class-div");
-        newText.classList.add("ez-class-span");
-        del_btn.innerText = "-";
-        del_btn.classList.add("ez-my-btn");
-        del_btn.onclick = function () {
-            var course_list_div = document.getElementById("course_list_div");
-            var psb_list_div = document.getElementById("psb_list_div");
-            chrome.storage.sync.get(
-                ["course_code_list", "psb_list"],
-                (data) => {
-                    var course_code_list =
-                        window.courseType.courseCodeListFromStorage(
-                            data.course_code_list
-                        );
-                    course_code_list.removeCourseByTitle(course.title);
-                    course_list_div.removeChild(tempDiv);
-                    if (data.psb_list) {
-                        let psb_list =
-                            window.courseType.courseCodeListFromStorage(
-                                data.psb_list
-                            );
-                        psb_list.addCourse(course);
-                        let psb_course = CourseAddBtn(course, custom, inner);
-                        psb_list_div.appendChild(psb_course);
-                        chrome.storage.sync.set({ psb_list: psb_list });
-                    }
+        var tempDiv = window.elements.Div({
+            className: "ez-class-div",
+        },[
+            // newText
+            window.elements.Div({
+                className: "ez-class-p",
+                style: {
+                    width: "240px",
+                },
+                innerText: course.title,
+                title: course.title,
+            }),
+            // del_btn
+            window.elements.Div({
+                innerText: "-",
+                className: "ez-my-btn",
+                onClick: function () {
+                    var course_list_div = document.getElementById("course_list_div");
+                    var psb_list_div = document.getElementById("psb_list_div");
+                    chrome.storage.sync.get(
+                        ["course_code_list", "psb_list"],
+                        (data) => {
+                            var course_code_list =
+                                window.courseType.courseCodeListFromStorage(
+                                    data.course_code_list
+                                );
+                            course_code_list.removeCourseByTitle(course.title);
+                            course_list_div.removeChild(tempDiv);
+                            if (data.psb_list) {
+                                let psb_list =
+                                    window.courseType.courseCodeListFromStorage(
+                                        data.psb_list
+                                    );
+                                psb_list.addCourse(course);
+                                let psb_course = CourseAddBtn(course, custom, inner);
+                                psb_list_div.appendChild(psb_course);
+                                chrome.storage.sync.set({ psb_list: psb_list });
+                            }
+                            chrome.storage.sync.set({ course_code_list: course_code_list });
+                        }
+                    );
                 }
-            );
-        };
-        newText.innerText = course.title;
-        newText.setAttribute("title", course.title);
-        tempDiv.appendChild(newText);
-        tempDiv.appendChild(del_btn);
+            })
+        ]);
         return tempDiv;
     });
 }
@@ -193,7 +201,13 @@ window.popup.MoodlePopup = async function () {
         },
         [
             window.elements.H1({
-                style: { marginTop: "0px" },
+                style: { 
+                    fontSize: "30px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#555", 
+                    margin: "10px 0"
+                 },
                 innerText: "mO.odle",
             }),
             await CourseBtnList(),
