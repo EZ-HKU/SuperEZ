@@ -89,9 +89,16 @@ function init() {
                         let container = document.querySelector(
                             "#ez-overlay-container"
                         );
+                        let pupupContainer = document.querySelector(
+                            "#ez-popup-container"
+                        );
                         if (container) {
                             container.style.visibility = "hidden";
                             container.style.opacity = 0;
+                        }
+                        if (pupupContainer) {
+                            pupupContainer.style.visibility = "hidden";
+                            pupupContainer.style.opacity = 0;
                         }
                     },
                 })
