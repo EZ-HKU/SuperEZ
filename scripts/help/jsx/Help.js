@@ -19,6 +19,9 @@ window.popup.HelpPopup = async function (custom, inner) {
             window.elements.H3({
                 innerText: "Help",
             }),
+            window.elements.Div({
+                innerText: "v0.1.0-alpha",
+            }),
             window.elements.A({
                 href: "https://github.com/EZ-HKU/SuperEZ",
                 innerText: "GitHub",
