@@ -51,12 +51,12 @@
     transition: all 0.4s ease;
     background-color: #ffffff;
     z-index: 88888888;
-
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 28px;
     opacity: 0;
+    user-select: none !important;
     visibility: hidden;
 }
 
@@ -81,6 +81,7 @@
     align-items: center;
     display: flex;
     font-size:  0px;
+    user-select: none !important;
 }
 
 #ez-navigator:hover .ez-inner{
