@@ -50,19 +50,21 @@ if (
     });
 } else if (url.includes("https://lib.hku.hk/hkulauth")) {
     fastHKUshowLoading();
+    // check if the page is fully loaded
+    window.addEventListener("load", function () {
+        window.fastHKUTryLogin(function (data) {
+            var userid = document.getElementsByName("userid")[0];
+            var password = document.getElementsByName("password")[0];
 
-    window.fastHKUTryLogin(function (data) {
-        var userid = document.getElementsByName("userid")[0];
-        var password = document.getElementsByName("password")[0];
+            if (userid && password) {
+                userid.value = data.username;
+                password.value = data.password;
 
-        if (userid && password) {
-            userid.value = data.username;
-            password.value = data.password;
-
-            setTimeout(() => {
-                document.getElementsByName("submit")[0].click();
-            }, 200);
-        }
+                setTimeout(() => {
+                    document.getElementsByName("submit")[0].click();
+                }, 200);
+            }
+        });
     });
 } else if (url.includes("https://moodle.hku.hk/login/index.php")) {
     fastHKUshowLoading();
