@@ -123,6 +123,33 @@ function SetUserForm (custom, inner) {
     ]);
 }
 
+function LogoutButton(custom, inner) {
+    return window.elements.Button({
+        innerText: "Logout",
+        style: {
+            width: "90%",
+            margin: "auto",
+            display: "block",
+            color: "white",
+            backgroundColor: "#ff0000",
+            borderColor: "#ff0000",
+            padding: "6px 12px",
+            fontSize: "14px",
+            lineHeight: "1.42857",
+            borderRadius: "3px",
+            cursor: "pointer",
+        },
+        onClick: async function () {
+            await chrome.runtime.sendMessage({
+                type: 'DELETE_ALL_HKU_COOKIES'
+            }).then(() => {
+                console.log('Cookies deleted');
+            });
+            window.utils.showNotification("Logout", "You have been logged out in all HKU websites. Please login again.");
+        },
+    });
+}
+
 
 function SettingBlock(name, element) {
     return window.elements.Div({
@@ -139,12 +166,14 @@ function SettingBlock(name, element) {
 }
 
 
+
 window.popup.SettingPopup = async function SettingPopup(custom, inner) {
     return (
         window.elements.Div({
             id: "ez-SettingPopup-container"
         },[
             SettingBlock("Set User", SetUserForm()),
+            SettingBlock("Quick Logout", LogoutButton()),
         ]
         )
     )
