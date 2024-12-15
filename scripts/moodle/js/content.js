@@ -179,19 +179,20 @@ function CourePage_handler() {
         } else {
             return;
         }
+
         var container = document.createElement("div");
+        container.className = "ez-moodle-container";
         var courses = course_code_list.getAllCourses();
         courses.forEach(function (course) {
             const div = document.createElement("div");
+            div.style.margin = "3px 0";
             var text = document.createElement("div");
             text.textContent = course.title;
-            text.style.whiteSpace = "nowrap";
-            text.style.overflow = "hidden";
-            text.style.textOverflow = "ellipsis";
-            text.style.marginInline = "10px";
             text.setAttribute("title", course.title);
+            text.className = "ez-class-p";
             div.appendChild(text);
             div.classList.add("psb-div");
+            div.style.width = "90%";
             div.addEventListener("click", () => {
                 window.location.href = course.url;
             });
@@ -200,17 +201,16 @@ function CourePage_handler() {
 
         const div = document.createElement("div");
         div.classList.add("dashed-line");
-        div.style.marginLeft = "10px";
-        div.style.width = "calc(100% - 20px)";
+        div.style.width = "calc(100% - 30px)";
         container.appendChild(div);
 
         const currentURL = window.location.href;
-        // if current page is not in the course_dict, add a button to add it
         const currentCourse = document.querySelector(".h2").textContent;
         if (!course_code_list.findCourseByTitle(currentCourse)) {
             var add_button = document.createElement("div");
             add_button.textContent = "Add this course";
-            add_button.classList.add("psb-div");
+            add_button.classList.add("psb-div", "ez-class-p");
+            add_button.style.width = "90%";
             add_button.addEventListener("click", () => {
                 course_code_list.addCourse(
                     new window.courseType.Course(
@@ -221,7 +221,6 @@ function CourePage_handler() {
                     )
                 );
                 chrome.storage.sync.set({ course_code_list: course_code_list });
-                // reload sidebar
                 sidebar.parentNode.removeChild(container);
                 CourePage_handler();
             });
@@ -229,11 +228,11 @@ function CourePage_handler() {
         } else {
             var remove_button = document.createElement("div");
             remove_button.textContent = "Remove this course";
-            remove_button.classList.add("psb-div");
+            remove_button.classList.add("psb-div", "ez-class-p");
+            remove_button.style.width = "90%";
             remove_button.addEventListener("click", () => {
-                course_code_list.deleteCourseByTitle(currentCourse);
+                course_code_list.removeCourseByTitle(currentCourse);
                 chrome.storage.sync.set({ course_code_list: course_code_list });
-                // reload sidebar
                 sidebar.parentNode.removeChild(container);
                 CourePage_handler();
             });
