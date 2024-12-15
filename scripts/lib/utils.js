@@ -51,3 +51,16 @@ window.utils.setPopup = (popup, custom) => {
     }
     
 };
+
+window.utils.showNotification = (title, text, custom) => {
+    window.utils.setPopup(
+        window.elements.Div(null, [
+            window.elements.H3({
+                innerText: title || "Notification",
+            }),
+            window.elements.Div({
+                innerText: text || "Notification",
+            }),
+        ])
+    );
+};

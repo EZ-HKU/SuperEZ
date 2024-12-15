@@ -5,6 +5,16 @@ let loginState = {
     inCooldown: false
 };
 
+function deleteCookie(targetDomain, targetCookies) {    
+    chrome.cookies.getAll({ domain: targetDomain }, async function(cookies) {
+        for (let cookie of cookies) {
+            if (targetCookies.includes(cookie.name)) {
+                await chrome.cookies.remove({ url: "https://" + targetDomain + cookie.path, name: cookie.name });
+            }
+        }
+    });
+};
+
 // 监听来自content script的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'LOGIN_FAILED') {
@@ -16,6 +26,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
     } else if (message.type === 'RESET_LOGIN_STATE') {
         resetLoginState();
+        sendResponse({ success: true });
+    } else if (message.type === 'DELETE_ALL_HKU_COOKIES') {
+        deleteCookie("hkuportal.hku.hk", ["CAS.AAD.SESSION.COOKIE", "JSESSIONID"]);
+        deleteCookie("moodle.hku.hk", ["MoodleSession"]);
+
+        // TODO: booking.lib.hku.hk 中没有 ASP.NET_SessionId
+        deleteCookie("booking.lib.hku.hk", ["ASP.NET_SessionId"]);
+
         sendResponse({ success: true });
     }
     return true;
