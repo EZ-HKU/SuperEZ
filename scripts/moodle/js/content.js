@@ -16,7 +16,10 @@ function get_psb() {
             }
             for (let i = 0; i < dates.length; i++) {
                 let date = dates[i];
-                if (date.innerText == "2024-25") {
+                let currentYear = new Date().getFullYear();
+                let nextYear = currentYear + 1;
+                let yearRange = `${currentYear}-${nextYear.toString().slice(-2)}`;
+                if (date.innerText == yearRange) {
                     var course_div =
                         date.parentNode.previousElementSibling
                             .firstElementChild;
