@@ -49,7 +49,7 @@ async function saveUser(username, password) {
     return await result;
 }
 
-function SetUserForm (custom, inner) {
+window.popup.SetUserForm = function(custom, inner) {
     async function onSubmit(e) {
         e.preventDefault();
         var username = document.getElementById("fasthku-username").value;
@@ -172,7 +172,7 @@ window.popup.SettingPopup = async function SettingPopup(custom, inner) {
         window.elements.Div({
             id: "ez-SettingPopup-container"
         },[
-            SettingBlock("Set User", SetUserForm()),
+            SettingBlock("Set User", window.popup.SetUserForm()),
             SettingBlock("Quick Logout", LogoutButton()),
         ]
         )
