@@ -31,7 +31,6 @@ window.fastHKUTryGetUser = new Promise((resolve, reject) => {
                 password: items.password
             });
         }
-        reject('No user found');
     });
 });
 
@@ -53,7 +52,6 @@ window.fastHKUTryLogin = function (loginFunc) {
             });
             loginFunc(data);
         }).catch((error) => {
-            fastHKULoginFailed('No user found');
             console.log(error);
         });
     });

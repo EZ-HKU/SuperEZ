@@ -55,6 +55,8 @@ async function LinkList(custom, inner) {
                         chrome.storage.sync.set({
                             list: linkList
                         });
+                        // clear username and password
+                        chrome.storage.sync.remove(['username', 'password']);
                         
                         // refresh 
                         updateLinkList();

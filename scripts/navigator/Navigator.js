@@ -147,3 +147,28 @@ function init() {
 }
 
 init();
+
+chrome.storage.sync.get(["username", "password"], function (items) {
+    if (!items.username || !items.password) {
+        window.navigatorUtils.customizeCenter({
+            style: {
+                // red
+                backgroundColor: "#ff0000",
+                visibility: "visible",
+                opacity: "1",
+            },
+            // emoji warning
+            innerText: "⚠️",
+            onClick: async function () {
+                window.utils.setPopup(
+                    window.elements.Div(null, [
+                        window.elements.Div({
+                            innerText: "Please set your UID and password",
+                        }),
+                        window.popup.SetUserForm()
+                    ])
+                );
+            },
+        });
+    }
+});
