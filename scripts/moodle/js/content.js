@@ -14,11 +14,21 @@ function get_psb() {
             } else {
                 var course_code_list = new window.courseType.CourseCodeList();
             }
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            let startYear, endYear;
+            if (month < 7) {
+                startYear = year-1;
+                endYear = year;
+            } else {
+                startYear = year;
+                endYear = year + 1;
+            }
+            let yearRange = `${startYear}-${endYear.toString().slice(-2)}`;
+            console.log({yearRange});
             for (let i = 0; i < dates.length; i++) {
                 let date = dates[i];
-                let currentYear = new Date().getFullYear();
-                let nextYear = currentYear + 1;
-                let yearRange = `${currentYear}-${nextYear.toString().slice(-2)}`;
                 if (date.innerText == yearRange) {
                     var course_div =
                         date.parentNode.previousElementSibling

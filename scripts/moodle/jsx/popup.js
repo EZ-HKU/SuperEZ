@@ -60,14 +60,15 @@ function CourseBtn(course, custom, inner) {
     });
 }
 
-async function updateCourseBtnList() {
-    let course_list_div = document.getElementById("course_list_div");
-    if (!course_list_div) {
-        return;
-    }
-    let course_list = await CourseBtnList();
-    course_list_div.parentNode.replaceChild(course_list, course_list_div);
-}
+// async function updateCourseBtnList() {
+//     var containers = document.getElementsByClassName("ez-moodle-container");
+//     var course_list_div = containers[0];
+//     if (!course_list_div) {
+//         return;
+//     }
+//     let course_list = await CourseBtnList();
+//     course_list_div.parentNode.replaceChild(course_list, course_list_div);
+// }
 
 async function CourseBtnList(custom, inner) {
     let data = await window.utils.getStorage(["course_code_list"]);
@@ -142,7 +143,8 @@ function CourseAddBtn(course, custom, inner) {
 }
 
 async function updateCourseAddBtnList() {
-    let psb_list_div = document.getElementById("psb_list_div");
+    let containers = document.getElementsByClassName("ez-moodle-container");
+    let psb_list_div = containers[1];
     if (!psb_list_div) {
         return;
     }
