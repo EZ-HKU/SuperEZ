@@ -23,7 +23,7 @@ window.popup.HelpPopup = async function (custom, inner) {
                 innerText: "Powered by EZ-HKU with ❤️",
             }),
             window.elements.Div({
-                innerText: "v0.2.0-beta",
+                innerText: "v0.3.1",
             }),
             window.elements.A({
                 href: "https://github.com/EZ-HKU/SuperEZ",
