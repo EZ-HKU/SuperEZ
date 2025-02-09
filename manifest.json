@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SuperEZ",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Better online HKU experience with SuperEZ",
   "background": {
     "service_worker": "scripts/background.js"
@@ -57,6 +57,7 @@
         "https://lib.hku.hk/hkulauth*", 
         "https://moodle.hku.hk/",
         "https://moodle.hku.hk/login/index.php",
+        "https://moodle.hku.hk/login/index.php?loginredirect=1",
         "https://adfs.connect.hku.hk/adfs/ls*",  
         "https://hkuportal.hku.hk/cas/aad*",
         "https://hkuportal.hku.hk/cas/login*",
