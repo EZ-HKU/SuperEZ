@@ -89,7 +89,7 @@
         "scripts/moodle/js/content.js"
       ],
       "matches": [
-        "https://moodle.hku.hk/",
+        "https://moodle.hku.hk/*",
         "https://moodle.hku.hk/course/view.php?id=*",
         "https://moodle.hku.hk/my/courses.php",
         "https://moodle.hku.hk/mod/*/view.php?id=*"
