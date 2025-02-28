@@ -279,13 +279,13 @@ function popupOnStart() {
 // route
 const currentURL = window.location.href;
 const route = () => {
-    if (currentURL.includes("view.php")) {
+    if (currentURL.includes("moodle.hku.hk/course/view.php") || (currentURL.includes("https://moodle.hku.hk/mod/") && currentURL.includes("view.php"))) {
         // 课程页面
         CourePage_handler();
-    } else if (currentURL.includes("courses.php")) {
+    } else if (currentURL.includes("moodle.hku.hk/my/courses.php")) {
         // my courses
         CourseList_handler();
-    } else {
+    } else if (currentURL == "https://moodle.hku.hk/") {
         // 主页
         get_psb();
         initialize();
@@ -294,3 +294,39 @@ const route = () => {
 };
 
 route();
+
+chrome.storage.sync.get(["course_code_list"], (data) => {
+    var pop = false
+    if (!data.course_code_list) {
+        pop = true
+    }
+    var courseCodeList = window.courseType.courseCodeListFromStorage(
+        data.course_code_list
+    );
+    var courses = courseCodeList.getAllCourses();
+    if (courses.length == 0) {
+        pop = true
+    }
+    if (pop) {
+        window.navigatorUtils.customizeCenter({
+            style: {
+                visibility: "visible",
+                opacity: "1",
+            },
+            // emoji warning
+            innerText: "📚",
+            onClick: async function () {
+                window.utils.setPopup(await window.popup.MoodlePopup(), {
+                    container: {
+                        style: {
+                            width: "350px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                        },
+                    },
+                });
+            },
+        });
+    }
+});
