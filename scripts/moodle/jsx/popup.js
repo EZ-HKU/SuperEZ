@@ -164,30 +164,17 @@ async function CourseAddBtnList(custom, inner) {
     }
 
     if (data.psb_list) {
-        let psb_list = window.courseType.courseCodeListFromStorage(
-            data.psb_list
-        );
-        let courses = psb_list.getAllCourses();
-        return window.elements.Div({
-        }, [
-            window.elements.Div({
-            className: "ez-annotation",
-            innerHTML: 'Available courses <svg t="1740894086256" class="icon ez-moodle-info" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1606" width="13" height="13" style="margin-bottom: 2px;"><path d="M641.877333 660.906667h-85.205333v-233.386667a35.968 35.968 0 0 0-36.010667-36.010667h-96a35.968 35.968 0 1 0 0 71.978667h59.989334v197.461333H399.488a35.968 35.968 0 1 0 0 71.978667h242.389333a35.968 35.968 0 1 0 0-71.978667z m-157.226666-368.426667a36.010667 36.010667 0 1 0 72.021333 0 36.010667 36.010667 0 0 0-72.021333 0z" fill="#595959" p-id="1607"></path><path d="M512 938.666667C276.352 938.666667 85.333333 747.648 85.333333 512S276.352 85.333333 512 85.333333s426.666667 191.018667 426.666667 426.666667-191.018667 426.666667-426.666667 426.666667z m0-85.333334a341.333333 341.333333 0 1 0 0-682.666666 341.333333 341.333333 0 0 0 0 682.666666z" fill="#595959" p-id="1608"></path></svg><div class="ez-moodle-tip">Click to add your current courses</div>'
-            }),
-            window.elements.Div(
-            {
-                className: "ez-moodle-container"
-            },
-            courses.map((course) => CourseAddBtn(course, custom, inner))
-            )
-        ]
-        );
-    } else {
-        return window.elements.Div(
-            {
-                className: "ez-moodle-container",
-            },
-            [
+        if (data.psb_list.courseCodes.length > 0) {
+            let psb_list = window.courseType.courseCodeListFromStorage(
+                data.psb_list
+            );
+            let courses = psb_list.getAllCourses();
+            return window.elements.Div({
+            }, [
+                window.elements.Div({
+                    innerText: "Available courses",
+                    className: "ez-annotation",
+                }),
                 window.elements.Div(
                     {
                         className: "ez-moodle-container"
