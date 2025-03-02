@@ -73,6 +73,7 @@
     color: #656565;
     text-align: left;
     margin-left: 8px;
+    position: relative;
 }
 
 /* Course Page CSS */
@@ -120,4 +121,25 @@
 #reset:hover {
     transform: rotate(360deg);
     transition: transform 0.5s ease-in-out;
+}
+
+.ez-moodle-tip {
+    position: absolute;
+    right: 10px;
+    border: 1px solid #D2D9DF;
+    box-shadow: 1px 1px 0px rgba(211, 211, 211, 0.2);
+    border-radius: 4px;
+    padding: 2px 3px; 
+    opacity: 0;
+    font-size: 10px;
+    height: 20px;
+    background-color: white;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.ez-moodle-info:hover ~ .ez-moodle-tip {
+    opacity: 1;
 }
