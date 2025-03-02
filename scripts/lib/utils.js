@@ -24,7 +24,7 @@ window.utils.setPopup = (popup, custom) => {
     let popupContainer = window.elements.Container(containerCustom, [popup]);
 
     let currentPopup = document.querySelector("#ez-popup-container");
-    
+
     if (container.style.visibility === "visible") {
         currentPopup.style.visibility = "hidden";
         currentPopup.style.opacity = 0;
@@ -49,7 +49,7 @@ window.utils.setPopup = (popup, custom) => {
         container.style.visibility = "visible";
         container.style.opacity = 1;
     }
-    
+
 };
 
 window.utils.showNotification = (title, text, custom) => {
@@ -64,3 +64,32 @@ window.utils.showNotification = (title, text, custom) => {
         ])
     );
 };
+
+window.utils.switchUserChangeMoodle = (oldUser, newUser) => {
+    chrome.storage.sync.get(["moodle_user_database", "psb_list", "course_code_list"], (data) => {
+        let moodle_user_database = data.moodle_user_database;
+        if (!moodle_user_database) {
+            moodle_user_database = {};
+        }
+        let psb_list = data.psb_list;
+        let course_code_list = data.course_code_list;
+        if (!psb_list && !course_code_list) {
+            psb_list = [];
+            course_code_list = [];
+        }
+        moodle_user_database[oldUser] = [psb_list, course_code_list];
+
+        if (moodle_user_database[newUser]) {
+            [psb_list, course_code_list] = moodle_user_database[newUser];
+        } else {
+            psb_list = {"courseCodes":[]};
+            course_code_list = {"courseCodes":[]};
+        }
+        chrome.storage.sync.set({
+            moodle_user_database: moodle_user_database,
+            psb_list: psb_list,
+            course_code_list: course_code_list
+        });
+    });
+}
+

@@ -68,6 +68,8 @@ async function LinkList(custom, inner) {
                             username: link.username,
                             password: link.password
                         });
+
+                        window.utils.switchUserChangeMoodle(username, link.username);
                         
                         // refresh
                         updateLinkList();
