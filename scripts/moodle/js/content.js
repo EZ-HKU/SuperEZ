@@ -3,8 +3,12 @@
 // 获取psb课程列表，并存入storage
 function get_psb() {
     chrome.storage.sync.get(["psb_list", "course_code_list"], (data) => {
-        if (!data.psb_list) {
-            var psb_list = new window.courseType.CourseCodeList();
+        if (data.psb_list) {
+            if (data.psb_list.courseCodes.length > 0) {
+                return;
+            }
+        }
+        var psb_list = new window.courseType.CourseCodeList();
             var dates = document.querySelectorAll(".categoryname");
             if (data.course_code_list) {
                 var course_code_list =
@@ -52,7 +56,6 @@ function get_psb() {
             }
             chrome.storage.sync.set({ psb_list: psb_list });
             console.log("psb:", psb_list);
-        }
     });
 }
 
