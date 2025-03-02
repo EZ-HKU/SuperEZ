@@ -190,25 +190,39 @@ async function CourseAddBtnList(custom, inner) {
             [
                 window.elements.Div(
                     {
-                        className: "psb-div",
-                        style: {
-                            margin: "5px 0",
-                        },
-                        OnClick: async function () {
-                            await sendOpenPopupOnStart();
-                            window.location.href = "https://moodle.hku.hk/";
-                        },
+                        className: "ez-moodle-container"
                     },
-                    [
-                        window.elements.P({
-                            className: "ez-class-p",
-                            innerText: "Get my courses",
-                        }),
-                    ]
-                ),
+                    courses.map((course) => CourseAddBtn(course, custom, inner))
+                )
             ]
-        );
+            );
+        }
     }
+    return window.elements.Div(
+        {
+            className: "ez-moodle-container",
+        },
+        [
+            window.elements.Div(
+                {
+                    className: "psb-div",
+                    style: {
+                        margin: "5px 0",
+                    },
+                    OnClick: async function () {
+                        await sendOpenPopupOnStart();
+                        window.location.href = "https://moodle.hku.hk/";
+                    },
+                },
+                [
+                    window.elements.P({
+                        className: "ez-class-p",
+                        innerText: "Get my courses",
+                    }),
+                ]
+            ),
+        ]
+    );
 }
 
 window.popup.MoodlePopup = async function () {
