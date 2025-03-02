@@ -164,51 +164,52 @@ async function CourseAddBtnList(custom, inner) {
     }
 
     if (data.psb_list) {
-        let psb_list = window.courseType.courseCodeListFromStorage(
-            data.psb_list
-        );
-        let courses = psb_list.getAllCourses();
-        return window.elements.Div({
-        }, [
-            window.elements.Div({
-                innerText: "Available courses",
-                className: "ez-annotation",
-            }),
-            window.elements.Div(
-                {
-                    className: "ez-moodle-container"
-                },
-                courses.map((course) => CourseAddBtn(course, custom, inner))
-            )
-        ]
-        );
-    } else {
-        return window.elements.Div(
-            {
-                className: "ez-moodle-container",
-            },
-            [
+        if (data.psb_list.courseCodes.length > 0) {
+            let psb_list = window.courseType.courseCodeListFromStorage(
+                data.psb_list
+            );
+            let courses = psb_list.getAllCourses();
+            return window.elements.Div({
+            }, [
+                window.elements.Div({
+                    innerText: "Available courses",
+                    className: "ez-annotation",
+                }),
                 window.elements.Div(
                     {
-                        className: "psb-div",
-                        style: {
-                            margin: "5px 0",
-                        },
-                        OnClick: async function () {
-                            await sendOpenPopupOnStart();
-                            window.location.href = "https://moodle.hku.hk/";
-                        },
+                        className: "ez-moodle-container"
                     },
-                    [
-                        window.elements.P({
-                            className: "ez-class-p",
-                            innerText: "Get my courses",
-                        }),
-                    ]
-                ),
+                    courses.map((course) => CourseAddBtn(course, custom, inner))
+                )
             ]
-        );
+            );
+        }
     }
+    return window.elements.Div(
+        {
+            className: "ez-moodle-container",
+        },
+        [
+            window.elements.Div(
+                {
+                    className: "psb-div",
+                    style: {
+                        margin: "5px 0",
+                    },
+                    OnClick: async function () {
+                        await sendOpenPopupOnStart();
+                        window.location.href = "https://moodle.hku.hk/";
+                    },
+                },
+                [
+                    window.elements.P({
+                        className: "ez-class-p",
+                        innerText: "Get my courses",
+                    }),
+                ]
+            ),
+        ]
+    );
 }
 
 window.popup.MoodlePopup = async function () {
