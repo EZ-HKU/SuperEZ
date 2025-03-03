@@ -298,7 +298,7 @@ const route = () => {
 
 route();
 
-chrome.storage.sync.get(["course_code_list"], (data) => {
+chrome.storage.sync.get(["course_code_list", "username"], (data) => {
     var pop = false
     if (!data.course_code_list) {
         pop = true
@@ -310,7 +310,7 @@ chrome.storage.sync.get(["course_code_list"], (data) => {
     if (courses.length == 0) {
         pop = true
     }
-    if (pop) {
+    if (pop && data.username) {
         window.navigatorUtils.customizeCenter({
             style: {
                 visibility: "visible",

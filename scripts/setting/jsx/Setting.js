@@ -54,6 +54,9 @@ window.popup.SetUserForm = function(custom, inner) {
         e.preventDefault();
         var username = document.getElementById("fasthku-username").value;
         var password = document.getElementById("fasthku-password").value;
+        if (username.includes("@connect.hku.hk")){
+            username = username.split("@")[0];
+        }
 
         let saved = await saveUser(username, password);
         if (saved) {
