@@ -93,3 +93,42 @@ window.utils.switchUserChangeMoodle = (oldUser, newUser) => {
     });
 }
 
+window.utils.setMoodleNotification = () => {
+    chrome.storage.sync.get(["course_code_list", "username"], (data) => {
+        var pop = false
+        if (!data.course_code_list) {
+            pop = true
+        }
+        var courseCodeList = window.courseType.courseCodeListFromStorage(
+            data.course_code_list
+        );
+        var courses = courseCodeList.getAllCourses();
+        if (courses.length == 0) {
+            pop = true
+        }
+        if (pop && data.username) {
+            window.navigatorUtils.customizeCenter({
+                style: {
+                    visibility: "visible",
+                    opacity: "1",
+                    // orange
+                    backgroundColor: "#FFA500",
+                },
+                // emoji warning
+                innerText: "📚",
+                onClick: async function () {
+                    async function sendOpenPopupOnStart() {
+                        return new Promise((resolve, reject) => {
+                            chrome.runtime.sendMessage({
+                                type: "SET_OPEN_POPUP_ON_MOODLE_START",
+                            });
+                            resolve(true);
+                        });
+                    }
+                    await sendOpenPopupOnStart();
+                    window.location.href = "https://moodle.hku.hk/";
+                },
+            });
+        }
+    });
+}
