@@ -20,9 +20,13 @@ function CourseBtn(course, custom, inner) {
                 className: "ez-class-p",
                 style: {
                     width: "240px",
+                    cursor: "pointer",
                 },
                 innerText: course.title,
                 title: course.title,
+                onClick: function () {
+                    window.location.href = course.url;
+                }
             }),
             window.elements.Div({
                 innerText: "-",
