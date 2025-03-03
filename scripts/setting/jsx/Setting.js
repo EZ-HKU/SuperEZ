@@ -64,6 +64,19 @@ window.popup.SetUserForm = function(custom, inner) {
         } else {
             alert("Username or password is empty.");
         }
+
+        window.navigatorUtils.customizeCenter({
+            style: {
+                visibility: "hidden",
+                opacity: "0",
+                backgroundColor: "#fff",
+            },
+            // set to original icon
+            innerText: "🚀",
+            onClick: null,
+        });
+
+        window.utils.setMoodleNotification();
     }
 
     let textInputStyle = {
