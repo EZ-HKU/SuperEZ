@@ -42,7 +42,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 80%;
-    max-width: 400px;
+    max-width: 500px;
     height: 50vh;
     margin: 25vh auto;
     transition: transform 0.3s ease;
@@ -54,7 +54,7 @@ body {
 
 .step-card h1 {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #333;
 }
 

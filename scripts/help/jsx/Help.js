@@ -31,7 +31,7 @@ window.popup.HelpPopup = async function (custom, inner) {
             }),
             window.elements.A({
                 href: "https://github.com/EZ-HKU/SuperEZ",
-                innerText: "GitHub",
+                innerText: "Document",
             }),
         ]
         )

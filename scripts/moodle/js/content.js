@@ -281,6 +281,11 @@ const route = () => {
         CourseList_handler();
     } else if (currentURL == "https://moodle.hku.hk/") {
         // 主页
+        // check if login
+        const login = document.getElementById("frontpage-course-list");
+        if (!login) {
+            return;
+        }
         get_psb();
         initialize();
         popupOnStart();
