@@ -186,7 +186,11 @@ function SettingBlock(name, element) {
 window.popup.SettingPopup = async function SettingPopup(custom, inner) {
     return (
         window.elements.Div({
-            id: "ez-SettingPopup-container"
+            id: "ez-SettingPopup-container",
+            style: {
+                width: "100%",
+                margin: "auto",
+            }
         },[
             SettingBlock("Set User", window.popup.SetUserForm()),
             SettingBlock("Quick Logout", LogoutButton()),

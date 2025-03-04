@@ -13,7 +13,16 @@ window.utils.getStorage = (keys) =>
 
 window.utils.setPopup = (popup, custom) => {
     if (!custom) {
-        custom = {};
+        custom = {
+            container: {
+                style: {
+                    width: "350px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    display: "flex",
+                },
+            },
+        };
     }
     var container = document.querySelector("#ez-overlay-container");
 

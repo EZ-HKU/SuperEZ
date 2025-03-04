@@ -86,7 +86,11 @@ async function LinkList(custom, inner) {
 window.popup.UserPopup = async function UserPopup(custom, inner) {
     return (
         window.elements.Div({
-            id: "FastHKUPopup-container"
+            id: "FastHKUPopup-container",
+            style: {
+                width: "100%",
+                margin: "auto",
+            }
         },[
             await LinkList(),
             window.elements.A({
