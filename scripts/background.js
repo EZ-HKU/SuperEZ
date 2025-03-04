@@ -6,3 +6,7 @@ importScripts("moodle/background.js");
 
 // omnibox
 importScripts("omnibox.js");
+
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.runtime.openOptionsPage();
+  });
