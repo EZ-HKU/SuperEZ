@@ -70,7 +70,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
     background-color: #007bff;
     color: white;
     position: absolute;
@@ -81,10 +81,31 @@ body {
     background-color: #0056b3;
 }
 
-.ez-guidance-tip{
-    border: 1px solid #fff588;
+.next-btn:active, 
+.jump-btn:active{
+    scale: 0.9;
+}
+
+.jump-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #E8E8E8;
     border-radius: 5px;
-    background-color: #fffac2;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #F8F8F8;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.jump-btn:hover {
+    background-color: #E1E2E2;
+}
+
+.ez-guidance-tip{
+    border: 1px solid #fff8a7;
+    border-radius: 5px;
+    background-color: #fffbce;
     padding: 8px;
     color: #4d4d4d;
+    margin: 8px 0;
 }
