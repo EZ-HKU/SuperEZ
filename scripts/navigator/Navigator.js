@@ -141,6 +141,9 @@ init();
 
 chrome.storage.sync.get(["username", "password"], function (items) {
     if (!items.username || !items.password) {
+        if (window.location.href.includes("chrome-extension")) {
+            return;
+        }
         window.navigatorUtils.customizeCenter({
             style: {
                 // red
