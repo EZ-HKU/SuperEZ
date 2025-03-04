@@ -14,7 +14,11 @@ if (!window.popup) {
 window.popup.HelpPopup = async function (custom, inner) {
     return (
         window.elements.Div({
-            id: "ez-HelpPopup-container"
+            id: "ez-HelpPopup-container",
+            style: {
+                width: "100%",
+                margin: "auto",
+            },
         },[
             window.elements.H3({
                 innerText: "Help",

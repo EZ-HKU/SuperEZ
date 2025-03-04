@@ -116,16 +116,7 @@ function init() {
         {
             content: "📚",
             onClick: async function () {
-                window.utils.setPopup(await window.popup.MoodlePopup(), {
-                    container: {
-                        style: {
-                            width: "350px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            display: "flex",
-                        },
-                    },
-                });
+                window.utils.setPopup(await window.popup.MoodlePopup());
             },
         },
         {
