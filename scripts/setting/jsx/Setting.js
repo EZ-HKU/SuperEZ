@@ -46,6 +46,10 @@ async function saveUser(username, password) {
             resolve(true);
         });
     });
+    const steps = document.querySelectorAll('.step-card');
+    if (steps) {
+        steps[2].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return await result;
 }
 
@@ -67,8 +71,6 @@ window.popup.SetUserForm = function(custom, inner) {
 
         window.navigatorUtils.customizeCenter({
             style: {
-                visibility: "hidden",
-                opacity: "0",
                 backgroundColor: "#fff",
             },
             // set to original icon
