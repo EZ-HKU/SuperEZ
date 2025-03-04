@@ -176,6 +176,11 @@ function SettingBlock(name, element) {
     }, [
         window.elements.H3({
             innerText: name,
+            style: {
+                marginBottom: "10px",
+                fontSize: "20px",
+                fontWeight: "bold",
+            },
         }),
         element,
     ]);
