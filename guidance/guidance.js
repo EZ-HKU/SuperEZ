@@ -17,12 +17,12 @@ navigator.addEventListener("mouseover", () => {
     steps[1].scrollIntoView({ behavior: 'smooth', block: 'center' });
 }, { once: true });
 
-const jumpBtns = document.querySelectorAll('.jump-btn');
-jumpBtns[0].addEventListener('click', () => {
-    window.open('https://moodle.hku.hk/', '_blank');
-});
+// const jumpBtns = document.querySelectorAll('.jump-btn');
+// jumpBtns[0].addEventListener('click', () => {
+//     window.open('https://moodle.hku.hk/', '_blank');
+// });
 
-jumpBtns[1].addEventListener('click', () => {
-    window.open('https://sis-eportal.hku.hk/psp/ptlprod/EMPLOYEE/EMPL/h/?tab=DEFAULT', '_blank');
-});
+// jumpBtns[1].addEventListener('click', () => {
+//     window.open('https://sis-eportal.hku.hk/psp/ptlprod/EMPLOYEE/EMPL/h/?tab=DEFAULT', '_blank');
+// });
 
