@@ -138,8 +138,10 @@
     transition: opacity 0.3s ease-in-out;
     display: flex;
     align-items: center;
+    visibility: hidden;
 }
 
 .ez-moodle-info:hover ~ .ez-moodle-tip {
     opacity: 1;
+    visibility: visible;
 }

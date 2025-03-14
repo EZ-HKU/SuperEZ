@@ -129,7 +129,8 @@ function generate() {
                     var url = parent_node.querySelector("a").href;
                     var title = i.parentNode
                         .querySelector(".sr-only")
-                        .textContent.substring(27);
+                        .textContent.substring(19);
+                    console.log(i.parentNode.querySelector(".sr-only"));
                     var code = title.substring(0, 8);
                     var detail = title.substring(9);
                     chrome.storage.sync.get(["course_code_list"], (data) => {

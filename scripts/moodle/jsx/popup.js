@@ -102,6 +102,22 @@ async function CourseBtnList(custom, inner) {
                 className: "ez-moodle-container",
             },
             courses.map((course) => CourseBtn(course, custom, inner))
+        ), 
+        window.elements.Div({
+            className: "psb-div",
+            style:{
+                marginTop: "15px",
+            },
+            OnClick: function () {
+                window.location.href = "https://moodle.hku.hk/";
+            }
+        },
+            [
+                window.elements.Div({
+                    innerText: "揀好咗！",
+                    className: "ez-class-p",
+                })
+            ]
         )
     ])
 }
