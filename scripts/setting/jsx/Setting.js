@@ -47,7 +47,7 @@ async function saveUser(username, password) {
         });
     });
     const steps = document.querySelectorAll('.step-card');
-    if (steps) {
+    if (steps.length > 2) {
         steps[2].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     return await result;

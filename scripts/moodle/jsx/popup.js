@@ -64,33 +64,18 @@ function CourseBtn(course, custom, inner) {
     });
 }
 
-// async function updateCourseBtnList() {
-//     var containers = document.getElementsByClassName("ez-moodle-container");
-//     var course_list_div = containers[0];
-//     if (!course_list_div) {
-//         return;
-//     }
-//     let course_list = await CourseBtnList();
-//     course_list_div.parentNode.replaceChild(course_list, course_list_div);
-// }
-
 async function CourseBtnList(custom, inner) {
     let data = await window.utils.getStorage(["course_code_list"]);
 
-    if (!data.course_code_list) {
-        return window.elements.Div({
-        }, [window.elements.Div({
-            innerText: "Current courses",
-            className: "ez-annotation",
-        }),
-        window.elements.Div({ className: "ez-moodle-container" })
-        ]);
+    let courses = [];
+    
+    if (data.course_code_list) {
+        let course_code_list = window.courseType.courseCodeListFromStorage(
+            data.course_code_list
+        );
+        courses = course_code_list.getAllCourses();
     }
 
-    let course_code_list = window.courseType.courseCodeListFromStorage(
-        data.course_code_list
-    );
-    let courses = course_code_list.getAllCourses();
     return window.elements.Div({
     }, [
         window.elements.Div({
