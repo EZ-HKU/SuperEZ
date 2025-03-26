@@ -10,6 +10,9 @@ importScripts("superload/background.js");
 // omnibox
 importScripts("omnibox.js");
 
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.runtime.openOptionsPage();
-  });
+// on first install
+chrome.runtime.onInstalled.addListener(function (details) {
+    if (details.reason == "install") {
+        chrome.runtime.openOptionsPage();
+    }
+});
