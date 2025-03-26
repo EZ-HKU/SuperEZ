@@ -128,7 +128,7 @@ function init() {
         {
             content: "❓",
             onClick: async function () {
-                window.utils.setPopup(await window.popup.HelpPopup());
+                window.utils.setPopup(window.popup.SuperLoadPopup());
             },
         },
     ];

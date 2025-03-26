@@ -57,6 +57,9 @@ window.elements.Container = function (custom, inner) {
             boxSizing: "border-box",
             fontFamily: "sans-serif",
             fontSize: "14px",
+            overflow: "auto",
+            maxHeight: "80%",
+            flexDirection: "column",
         });
 
         return container;

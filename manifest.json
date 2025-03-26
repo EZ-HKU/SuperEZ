@@ -28,6 +28,7 @@
         "scripts/fasthku/jsx/popup.js",
         "scripts/moodle/jsx/popup.js",
         "scripts/moodle/js/courseType.js",
+        "scripts/superload/jsx/popup.js",
         "scripts/setting/jsx/Setting.js",
         "scripts/help/jsx/Help.js",
         "scripts/navigator/utils.js",
@@ -106,7 +107,8 @@
     "storage",
     "tabs",
     "activeTab",
-    "cookies"
+    "cookies", 
+    "downloads"
   ],
   "host_permissions": [
     "https://hkuportal.hku.hk/*",
@@ -123,7 +125,7 @@
     "keyword": "e"
   },
   "web_accessible_resources": [{
-    "resources": ["images/setting.svg"],
+    "resources": ["images/setting.svg","icons/*.png"],
     "matches": ["<all_urls>"]
   }]
 }
