@@ -19,7 +19,7 @@ window.utils.setPopup = (popup, custom) => {
                     width: "350px",
                     justifyContent: "center",
                     alignItems: "center",
-                    // display: "flex",
+                    display: "flex",
                 },
             },
         };
