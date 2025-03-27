@@ -212,3 +212,61 @@ window.elements.Form = function (custom, inner) {
         return formContainer;
     });
 };
+
+window.elements.Tbody = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let tbodyContainer = document.createElement("tbody");
+        return tbodyContainer;
+    });
+}
+
+window.elements.Table = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let tableContainer = document.createElement("table");
+        tableContainer.style.width = "100%";
+        tableContainer.style.borderCollapse = "collapse";
+        return tableContainer;
+    });
+}
+
+window.elements.Tr = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let trContainer = document.createElement("tr");
+        return trContainer;
+    });
+};
+
+window.elements.Td = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let tdContainer = document.createElement("td");
+        return tdContainer;
+    });
+};
+
+window.elements.Thead = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let theadContainer = document.createElement("thead");
+        return theadContainer;
+    });
+}
+
+window.elements.Th = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let thContainer = document.createElement("th");
+        return thContainer;
+    });
+};
+
+window.elements.Image = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let imgContainer = document.createElement("img");
+        return imgContainer;
+    });
+}
+
+window.elements.Link = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let linkContainer = document.createElement("link");
+        return linkContainer;
+    });
+}
