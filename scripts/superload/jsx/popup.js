@@ -1,6 +1,9 @@
 function findPDFLinks() {
     let fileLinks = [];
-    const links = document.getElementsByTagName('a');
+    let links = document.getElementsByTagName('a');
+    // filter links
+    links = Array.from(links).filter(link => link.href && link.href.includes('https://moodle.hku.hk/mod/resource/') && link.classList.contains('aalink'));
+    console.log(links);
     for (let link of links) {
         if (link.href &&
             link.href.includes('https://moodle.hku.hk/mod/resource/')) {
@@ -8,11 +11,9 @@ function findPDFLinks() {
             let iconSrc = '';
 
             try {
-                // 获取父级的父级的父级的上一个sibling
                 const parent = link.parentElement?.parentElement?.parentElement;
                 const sibling = parent?.previousElementSibling;
 
-                // 在sibling中查找img标签
                 if (sibling) {
                     const img = sibling.querySelector('img');
                     if (img && img.src) {
@@ -27,12 +28,13 @@ function findPDFLinks() {
                 console.error('Error finding file type icon:', error);
             }
             fileLinks.push({
-                text: link.textContent.trim() || 'Unnamed PDF',
+                text: link.textContent.trim().slice(-5) === ' File' ? link.textContent.trim().slice(0, -5) : link.textContent.trim(),
                 url: link.href,
                 fileType: fileType,
             });
         }
     }
+    console.log(fileLinks);
     return fileLinks;
 }
 
@@ -57,7 +59,7 @@ superLoadPopup = () => {
     <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
         <input type="checkbox" id="select-all">
     </th>
-    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;"></th>
+    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">File</th>
 `;
     thead.appendChild(headerRow);
     table.appendChild(thead);
@@ -79,6 +81,7 @@ superLoadPopup = () => {
         </td>
     `;
         tbody.appendChild(row);
+
     });
     table.appendChild(tbody);
 
@@ -120,8 +123,8 @@ superLoadPopup = () => {
                 action: 'downloadFile',
                 url: file.url,
                 filename: file.text.replace(/[\\/?"*<>|:]|'/g, ''),
-                address: document.querySelector('.h2').textContent, 
-                conflictAction: 'uniquify', 
+                address: document.querySelector('.h2').textContent,
+                conflictAction: 'uniquify',
                 saveAs: false
             });
         });
