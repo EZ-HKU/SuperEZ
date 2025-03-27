@@ -290,6 +290,35 @@ const route = () => {
         get_psb();
         initialize();
         popupOnStart();
+    } ;
+    
+    if (currentURL.includes("https://moodle.hku.hk/course/view.php?id=")) {
+        window.navigatorUtils.customizeCenter({
+            style: {
+                // backgroundColor: "#87CEEB",
+                visibility: "visible",
+                opacity: "1 ",
+            },
+            // save file emoji
+            innerText: "📥",
+            onClick: async function () {
+                window.utils.setPopup(window.popup.SuperLoadPopup(),
+                    {
+                        container: {
+                            style: {
+                                width: "500px",
+                                flexDirection: "column",
+                                maxHeight: "80%",
+                                overflow: "auto",
+                                justifyContent: "none",
+                                alignItems: "none",
+                                textAlign: "left",
+                            },
+                        },
+                    }
+                );
+            },
+        });
     }
 };
 
