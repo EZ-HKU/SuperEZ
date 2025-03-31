@@ -40,6 +40,7 @@ function findPDFLinks() {
 
 window.popup.SuperLoadPopup = function () {
     let fileLinks = findPDFLinks();
+    let posibleFileTypes = ['pdf', 'file', 'powerpoint', 'spreadsheet', 'archive', 'document', 'video', 'image'];
     return (
         window.elements.Div({
             id: "ez-superload-file-links-table",
@@ -113,7 +114,7 @@ window.popup.SuperLoadPopup = function () {
                                 },
                             }, [
                                 window.elements.Image({
-                                    src: chrome.runtime.getURL(`icons/${file.fileType}.png`),
+                                    src: chrome.runtime.getURL(posibleFileTypes.includes(file.fileType) ? `icons/${file.fileType}.png` : 'icons/file.png'),
                                     alt: file.fileType,
                                     style: {
                                         width: "20px",
