@@ -28,23 +28,23 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
-Better online HKU experience with SuperEZ
+SuperEZでより良いオンラインHKU体験を
 
-## SetUp
-1. Install the latest release from Google Chrome Web Store
-2. Go to any HKU service page
-3. Move your mouse to right-bottom corner
-4. Click the Settings icon
-5. Set up your preference
-6. Enjoy!
-   
-## Wiki
-For detailed documentation, please visit our [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
+## セットアップ
+1. Google Chromeウェブストアから最新のリリースをインストールします。
+2. 任意のHKUサービスページに移動します。
+3. マウスを右下隅に移動します。
+4. 設定アイコンをクリックします。
+5. お好みの設定を行います。
+6. 楽しんでください！
 
-## Functions
+## ウィキ
+詳細なドキュメントについては、[ウィキ](https://github.com/EZ-HKU/SuperEZ/wiki)をご覧ください。
+
+## 機能
 ### FastHKU
-One step to access HKU services
+HKUサービスにアクセスするためのワンステップ
 ### mO.odle
-Make Moodle great again!
+Moodleを再び素晴らしく！
 ### SuperLoad
-Download all course files in one click!
+すべてのコースファイルをワンクリックでダウンロード！

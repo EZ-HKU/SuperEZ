@@ -28,23 +28,23 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
-Better online HKU experience with SuperEZ
+更好的在线香港大学体验，尽在SuperEZ
 
-## SetUp
-1. Install the latest release from Google Chrome Web Store
-2. Go to any HKU service page
-3. Move your mouse to right-bottom corner
-4. Click the Settings icon
-5. Set up your preference
-6. Enjoy!
+## 设置
+1. 从Google Chrome网上应用店安装最新版本
+2. 访问任何香港大学服务页面
+3. 将鼠标移动到右下角
+4. 点击设置图标
+5. 设置您的偏好
+6. 享受吧！
    
-## Wiki
-For detailed documentation, please visit our [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
+## 维基
+有关详细文档，请访问我们的[维基](https://github.com/EZ-HKU/SuperEZ/wiki)。
 
-## Functions
+## 功能
 ### FastHKU
-One step to access HKU services
+一步访问香港大学服务
 ### mO.odle
-Make Moodle great again!
+让Moodle再次变得出色！
 ### SuperLoad
-Download all course files in one click!
+一键下载所有课程文件！

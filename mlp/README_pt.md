@@ -19,7 +19,7 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_es.md">Español</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ja.md">日本語</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ru.md">Русский</a> |
-        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_pt-br.md">Рortuguês</a> |
+        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_pt-br.md">Português</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_te.md">తెలుగు</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_fr.md">Français</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_de.md">Deutsch</a> |
@@ -28,23 +28,23 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
-Better online HKU experience with SuperEZ
+Melhor experiência online na HKU com o SuperEZ
 
-## SetUp
-1. Install the latest release from Google Chrome Web Store
-2. Go to any HKU service page
-3. Move your mouse to right-bottom corner
-4. Click the Settings icon
-5. Set up your preference
-6. Enjoy!
+## Configuração
+1. Instale a versão mais recente da Google Chrome Web Store
+2. Vá para qualquer página de serviço da HKU
+3. Mova seu mouse para o canto inferior direito
+4. Clique no ícone de Configurações
+5. Configure suas preferências
+6. Aproveite!
    
 ## Wiki
-For detailed documentation, please visit our [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
+Para documentação detalhada, visite nosso [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
 
-## Functions
+## Funções
 ### FastHKU
-One step to access HKU services
+Um passo para acessar os serviços da HKU
 ### mO.odle
-Make Moodle great again!
+Faça o Moodle ser ótimo novamente!
 ### SuperLoad
-Download all course files in one click!
+Baixe todos os arquivos do curso com um clique!
