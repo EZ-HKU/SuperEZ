@@ -12,7 +12,7 @@
 
 <h4 align="center">
     <p>
-        <a href="https://github.com/EZ-HKU/SuperEZ/">English</a> |
+        <a href="https://github.com/EZ-HKU/SuperEZ/">Tiếng Anh</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_zh-hans.md">简体中文</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_zh-hant.md">繁體中文</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ko.md">한국어</a> |
@@ -28,23 +28,23 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
-Better online HKU experience with SuperEZ
+Trải nghiệm HKU trực tuyến tốt hơn với SuperEZ
 
-## SetUp
-1. Install the latest release from Google Chrome Web Store
-2. Go to any HKU service page
-3. Move your mouse to right-bottom corner
-4. Click the Settings icon
-5. Set up your preference
-6. Enjoy!
+## Cài Đặt
+1. Cài đặt phiên bản mới nhất từ Google Chrome Web Store
+2. Truy cập bất kỳ trang dịch vụ HKU nào
+3. Di chuyển chuột đến góc dưới bên phải
+4. Nhấp vào biểu tượng Cài đặt
+5. Thiết lập sở thích của bạn
+6. Tận hưởng!
    
 ## Wiki
-For detailed documentation, please visit our [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
+Để biết thêm thông tin chi tiết, vui lòng truy cập [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
 
-## Functions
+## Chức Năng
 ### FastHKU
-One step to access HKU services
+Một bước để truy cập dịch vụ HKU
 ### mO.odle
-Make Moodle great again!
+Làm cho Moodle trở nên tuyệt vời hơn!
 ### SuperLoad
-Download all course files in one click!
+Tải xuống tất cả tài liệu khóa học chỉ với một cú nhấp chuột!

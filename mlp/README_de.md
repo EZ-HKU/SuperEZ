@@ -12,7 +12,7 @@
 
 <h4 align="center">
     <p>
-        <a href="https://github.com/EZ-HKU/SuperEZ/">English</a> |
+        <a href="https://github.com/EZ-HKU/SuperEZ/">Englisch</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_zh-hans.md">简体中文</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_zh-hant.md">繁體中文</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ko.md">한국어</a> |
@@ -28,23 +28,23 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
-Better online HKU experience with SuperEZ
+Bessere Online-HKU-Erfahrung mit SuperEZ
 
-## SetUp
-1. Install the latest release from Google Chrome Web Store
-2. Go to any HKU service page
-3. Move your mouse to right-bottom corner
-4. Click the Settings icon
-5. Set up your preference
-6. Enjoy!
-   
+## Einrichtung
+1. Installieren Sie die neueste Version aus dem Google Chrome Web Store
+2. Gehen Sie zu einer beliebigen HKU-Dienstseite
+3. Bewegen Sie die Maus in die rechte untere Ecke
+4. Klicken Sie auf das Einstellungssymbol
+5. Richten Sie Ihre Präferenzen ein
+6. Viel Spaß!
+
 ## Wiki
-For detailed documentation, please visit our [wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
+Für detaillierte Dokumentation besuchen Sie bitte unser [Wiki](https://github.com/EZ-HKU/SuperEZ/wiki).
 
-## Functions
+## Funktionen
 ### FastHKU
-One step to access HKU services
+Ein Schritt zum Zugriff auf HKU-Dienste
 ### mO.odle
-Make Moodle great again!
+Machen Sie Moodle wieder großartig!
 ### SuperLoad
-Download all course files in one click!
+Laden Sie alle Kursdateien mit einem Klick herunter!
