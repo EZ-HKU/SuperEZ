@@ -1,6 +1,6 @@
 <p align="center">
     <br>
-    <img src="./images/logowithtext.png" width="400"/>
+    <img src="https://github.com/EZ-HKU/SuperEZ/raw/main/images/logowithtext.png" width="400"/>
     <br>
 </p>
 
