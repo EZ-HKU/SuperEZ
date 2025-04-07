@@ -61,6 +61,20 @@ window.utils.setPopup = (popup, custom) => {
 
 };
 
+window.utils.closePopup = () => {
+    var container = document.querySelector("#ez-overlay-container");
+    var popupContainer = document.querySelector("#ez-popup-container");
+    if (popupContainer) {
+        popupContainer.style.visibility = "hidden";
+        popupContainer.style.opacity = 0;
+        setTimeout(() => {
+            container.removeChild(popupContainer);
+            container.style.visibility = "hidden";
+            container.style.opacity = 0;
+        }, 200);
+    }
+}
+
 window.utils.showNotification = (title, text, custom) => {
     window.utils.setPopup(
         window.elements.Div(null, [

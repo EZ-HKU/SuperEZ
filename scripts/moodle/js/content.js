@@ -302,17 +302,17 @@ const route = () => {
             // save file emoji
             innerText: "📥",
             onClick: async function () {
-                window.utils.setPopup(window.popup.SuperLoadPopup(),
+                window.utils.setPopup(await window.popup.SuperLoadPopup(),
                     {
                         container: {
                             style: {
                                 width: "500px",
                                 flexDirection: "column",
                                 maxHeight: "80%",
-                                overflow: "auto",
                                 justifyContent: "none",
                                 alignItems: "none",
                                 textAlign: "left",
+                                position: "relative",
                             },
                         },
                     }
