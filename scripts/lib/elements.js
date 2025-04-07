@@ -8,7 +8,7 @@ window.elements = {};
 
 window.elements.Text = function (text, custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {
-        let textElement = document.createElement("div");
+        let textElement = document.createElement("span");
         textElement.textContent = text;
         return textElement;
     });

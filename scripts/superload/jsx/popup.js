@@ -49,7 +49,7 @@ window.popup.SuperLoadPopup = async function () {
                 overflow: "auto",
                 maxHeight: "75vh",
             }
-        },[
+        }, [
             window.elements.Div({
                 id: "ez-superload-file-links-table",
                 style: {}
@@ -101,7 +101,27 @@ window.popup.SuperLoadPopup = async function () {
                                     textAlign: "center",
                                 },
                             }, [
-                                window.elements.Text("Status")
+                                window.elements.Button({
+                                    textContent: "Status",
+                                    title: "Click to select all undownloaded files",
+                                    style: {
+                                        backgroundColor: "#fff",
+                                        border: "1.5px solid #ddd",
+                                        cursor: "pointer",
+                                        margin: "0",
+                                        borderRadius: "5px",
+                                        fontWeight: "bold",
+                                        padding: "0 8px",
+                                    },
+                                    onClick: () => {
+                                        fileLinks
+                                        .filter(file => !downloadedFileIDs.includes(file.url.split("id=")[1]))
+                                        .forEach(file => {
+                                            let checkbox = document.getElementById(`ez-superload-file-checkbox-${fileLinks.indexOf(file)}`);
+                                            checkbox.checked = true;
+                                        });
+                                    }
+                                })
                             ])
                         ]),
                     ]),
@@ -141,10 +161,16 @@ window.popup.SuperLoadPopup = async function () {
                                             verticalAlign: "middle",
                                         },
                                     }),
-                                    window.elements.A({
-                                        href: file.url,
-                                        target: "_blank",
-                                        textContent: file.text,
+                                    window.elements.Text(file.text, {
+                                        style: {
+                                            color: "#00b48d",
+                                            cursor: "pointer",
+                                            marginLeft: "5px",
+                                        },
+                                        onClick: () => {
+                                            let checkbox = document.getElementById(`ez-superload-file-checkbox-${index}`);
+                                            checkbox.checked = !checkbox.checked;
+                                        }
                                     })
                                 ]),
                                 window.elements.Td({
