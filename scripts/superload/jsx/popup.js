@@ -3,7 +3,6 @@ function findPDFLinks() {
     let links = document.getElementsByTagName('a');
     // filter links
     links = Array.from(links).filter(link => link.href && link.href.includes('https://moodle.hku.hk/mod/resource/') && link.classList.contains('aalink'));
-    console.log(links);
     for (let link of links) {
         if (link.href &&
             link.href.includes('https://moodle.hku.hk/mod/resource/')) {
@@ -34,62 +33,39 @@ function findPDFLinks() {
             });
         }
     }
-    console.log(fileLinks);
     return fileLinks;
 }
 
-window.popup.SuperLoadPopup = function () {
+window.popup.SuperLoadPopup = async function () {
     let fileLinks = findPDFLinks();
     let posibleFileTypes = ['pdf', 'file', 'powerpoint', 'spreadsheet', 'archive', 'document', 'video', 'image'];
+    let downloadedFileIDs = (await window.utils.getStorageLocal('downloadedFileIDs')).downloadedFileIDs || [];
     return (
         window.elements.Div({
-            id: "ez-superload-file-links-table",
+            id: "ez-superload-file-links",
+            style: {
+                overflow: "auto",
+                maxHeight: "75vh",
+            }
         }, [
-            window.elements.Table({
-                style: {
-                    width: "100%",
-                    borderCollapse: "collapse",
-                },
+            window.elements.Div({
+                id: "ez-superload-file-links-table",
+                style: {}
             }, [
-                window.elements.Thead({
+                window.elements.Table({
                     style: {
-                        backgroundColor: "#f2f2f2",
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        marginBottom: "77px",
                     },
                 }, [
-                    window.elements.Tr({}, [
-                        window.elements.Th({
-                            style: {
-                                border: "1px solid #ddd",
-                                padding: "8px",
-                                textAlign: "center",
-                            },
-                        }, [
-                            window.elements.Input({
-                                type: "checkbox",
-                                id: "ez-superload-select-all",
-                                onClick: (e) => {
-                                    const checkboxes = document.querySelectorAll('.ez-superload-file-checkbox');
-                                    checkboxes.forEach(checkbox => {
-                                        checkbox.checked = e.target.checked;
-                                    });
-                                }
-                            })
-                        ]),
-                        window.elements.Th({
-                            style: {
-                                border: "1px solid #ddd",
-                                padding: "8px",
-                                textAlign: "left",
-                            },
-                        }, [
-                            window.elements.Text("File")
-                        ])
-                    ]),
-                ]),
-                window.elements.Tbody({}, 
-                    fileLinks.map((file, index) => {
-                        return window.elements.Tr({}, [
-                            window.elements.Td({
+                    window.elements.Thead({
+                        style: {
+                            backgroundColor: "#f2f2f2",
+                        },
+                    }, [
+                        window.elements.Tr({}, [
+                            window.elements.Th({
                                 style: {
                                     border: "1px solid #ddd",
                                     padding: "8px",
@@ -98,78 +74,205 @@ window.popup.SuperLoadPopup = function () {
                             }, [
                                 window.elements.Input({
                                     type: "checkbox",
-                                    className: "ez-superload-file-checkbox",
-                                    id: `ez-superload-file-checkbox-${index}`,
+                                    id: "ez-superload-select-all",
                                     onClick: (e) => {
-                                        const selectAllCheckbox = document.getElementById('ez-superload-select-all');
                                         const checkboxes = document.querySelectorAll('.ez-superload-file-checkbox');
-                                        selectAllCheckbox.checked = [...checkboxes].every(checkbox => checkbox.checked);
+                                        checkboxes.forEach(checkbox => {
+                                            checkbox.checked = e.target.checked;
+                                        });
                                     }
                                 })
                             ]),
-                            window.elements.Td({
+                            window.elements.Th({
                                 style: {
                                     border: "1px solid #ddd",
                                     padding: "8px",
+                                    textAlign: "left",
                                 },
                             }, [
-                                window.elements.Image({
-                                    src: chrome.runtime.getURL(posibleFileTypes.includes(file.fileType) ? `icons/${file.fileType}.png` : 'icons/file.png'),
-                                    alt: file.fileType,
+                                window.elements.Text("File")
+                            ]),
+                            window.elements.Th({
+                                style: {
+                                    border: "1px solid #ddd",
+                                    padding: "8px",
+                                    textAlign: "center",
+                                },
+                            }, [
+                                window.elements.Button({
+                                    textContent: "Status",
+                                    title: "Click to select all undownloaded files",
                                     style: {
-                                        width: "20px",
-                                        height: "20px",
-                                        verticalAlign: "middle",
+                                        backgroundColor: "#fff",
+                                        border: "1.5px solid #ddd",
+                                        cursor: "pointer",
+                                        margin: "0",
+                                        borderRadius: "5px",
+                                        fontWeight: "bold",
+                                        padding: "0 8px",
                                     },
-                                }),
-                                window.elements.A({
-                                    href: file.url,
-                                    target: "_blank",
-                                    textContent: file.text,
+                                    onClick: () => {
+                                        fileLinks
+                                        .filter(file => !downloadedFileIDs.includes(file.url.split("id=")[1]))
+                                        .forEach(file => {
+                                            let checkbox = document.getElementById(`ez-superload-file-checkbox-${fileLinks.indexOf(file)}`);
+                                            checkbox.checked = true;
+                                        });
+                                    }
                                 })
                             ])
-                        ]);
-                    })
-                ),
-                window.elements.Tr({}, [
-                    window.elements.Td({
-                        colSpan: 2,
-                        style: {
-                            textAlign: "right",
-                        },
-                    }, [
-                        window.elements.Button({
-                            id: "ez-superload-download-selected",
-                            textContent: "Download Selected",
-                            style: {
-                                marginTop: "10px",
-                                marginLeft: "10px",
-                                padding: "5px 10px",
-                                backgroundColor: "#007bff",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "3px",
-                                cursor: "pointer",
-                            },
-                            onClick: () => {
-                                const selectedCheckboxes = document.querySelectorAll('.ez-superload-file-checkbox:checked');
-                                selectedCheckboxes.forEach(checkbox => {
-                                    const index = checkbox.id.split('-').pop();
-                                    const file = fileLinks[index];
-                                    chrome.runtime.sendMessage({
-                                        action: 'downloadFile',
-                                        url: file.url,
-                                        filename: file.text.replace(/[\\/?"*<>|:]|'/g, ''),
-                                        address: document.querySelector('.h2').textContent,
-                                        conflictAction: 'uniquify',
-                                        saveAs: false
-                                    });
-                                });
-                            }
+                        ]),
+                    ]),
+                    window.elements.Tbody({},
+                        fileLinks.map((file, index) => {
+                            return window.elements.Tr({}, [
+                                window.elements.Td({
+                                    style: {
+                                        border: "1px solid #ddd",
+                                        padding: "8px",
+                                        textAlign: "center",
+                                    },
+                                }, [
+                                    window.elements.Input({
+                                        type: "checkbox",
+                                        className: "ez-superload-file-checkbox",
+                                        id: `ez-superload-file-checkbox-${index}`,
+                                        onClick: (e) => {
+                                            const selectAllCheckbox = document.getElementById('ez-superload-select-all');
+                                            const checkboxes = document.querySelectorAll('.ez-superload-file-checkbox');
+                                            selectAllCheckbox.checked = [...checkboxes].every(checkbox => checkbox.checked);
+                                        }
+                                    })
+                                ]),
+                                window.elements.Td({
+                                    style: {
+                                        border: "1px solid #ddd",
+                                        padding: "8px",
+                                    },
+                                }, [
+                                    window.elements.Image({
+                                        src: chrome.runtime.getURL(posibleFileTypes.includes(file.fileType) ? `icons/${file.fileType}.png` : 'icons/file.png'),
+                                        alt: file.fileType,
+                                        style: {
+                                            width: "20px",
+                                            height: "20px",
+                                            verticalAlign: "middle",
+                                        },
+                                    }),
+                                    window.elements.Text(file.text, {
+                                        style: {
+                                            color: "#00b48d",
+                                            cursor: "pointer",
+                                            marginLeft: "5px",
+                                        },
+                                        onClick: () => {
+                                            let checkbox = document.getElementById(`ez-superload-file-checkbox-${index}`);
+                                            checkbox.checked = !checkbox.checked;
+                                        }
+                                    })
+                                ]),
+                                window.elements.Td({
+                                    style: {
+                                        border: "1px solid #ddd",
+                                        padding: "8px",
+                                        textAlign: "center",
+                                    },
+                                }, [
+                                    downloadedFileIDs.includes(file.url.split("id=")[1]) ?
+                                        window.elements.Image({
+                                            src: chrome.runtime.getURL('icons/downloaded.png'),
+                                            alt: file.fileType,
+                                            style: {
+                                                width: "20px",
+                                                height: "20px",
+                                                verticalAlign: "middle",
+                                            },
+                                        }) : window.elements.Text("")
+                                ]
+                                )
+                            ]);
                         })
-                    ])
-                ])
-            ])
+                    ),
+                    window.elements.Tr({}, [
+                        window.elements.Td({
+                            style: {
+                                padding: "8px",
+                                textAlign: "center",
+                            },
+                        },[
+                            window.elements.Input({
+                                type: "checkbox",
+                                id: "ez-superload-auto-download",
+                                onClick: (e) => {
+                                    let course = document.querySelector('.h2').textContent;
+                                    chrome.storage.sync.get(['autoDownloadCourses'], function (items) {
+                                        if (!items.autoDownloadCourses) {
+                                            items.autoDownloadCourses = [];
+                                        }
+                                        if (e.target.checked) {
+                                            if (!items.autoDownloadCourses.includes(course)) {
+                                                items.autoDownloadCourses.push(course);
+                                            }
+                                        } else {
+                                            items.autoDownloadCourses = items.autoDownloadCourses.filter(item => item !== course);
+                                        }
+                                        chrome.storage.sync.set({ autoDownloadCourses: items.autoDownloadCourses });
+                                    });
+                                },
+                                checked: (await window.utils.getStorage('autoDownloadCourses')).autoDownloadCourses?.includes(document.querySelector('.h2').textContent) || false,
+                            }),
+                        ]),
+                        window.elements.Td({
+                            style: {
+                                padding: "8px",
+                                textAlign: "left",
+                            },
+                        }, [
+                            window.elements.Text("Check to auto Download this course")
+                        ]),
+                    ]),
+                ]),
+            ]),
+            window.elements.Button({
+                id: "ez-superload-download-selected",
+                textContent: "Download Selected",
+                style: {
+                    marginTop: "10px",
+                    marginLeft: "10px",
+                    padding: "5px 10px",
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "3px",
+                    cursor: "pointer",
+                    position: "absolute",
+                    bottom: "20px",
+                    right: "20px",
+                    zIndex: "9999",
+                },
+                onClick: () => {
+                    let fileIDs = [];
+                    let downloadFiles = [];
+                    let address = document.querySelector('.h2').textContent;
+                    const selectedCheckboxes = document.querySelectorAll('.ez-superload-file-checkbox:checked');
+                    selectedCheckboxes.forEach(checkbox => {
+                        const index = checkbox.id.split('-').pop();
+                        const file = fileLinks[index];
+                        downloadFiles.push({ url: file.url, filename: file.text.replace(/[\\/?"*<>|:]|'/g, ''), address: address });
+                        fileIDs.push(file.url.split("id=")[1]);
+                    });
+                    chrome.runtime.sendMessage({
+                        action: 'downloadFiles',
+                        downloadFiles: downloadFiles,
+                        conflictAction: 'uniquify',
+                        saveAs: false
+                    });
+                    downloadedFileIDs = [...new Set([...downloadedFileIDs, ...fileIDs])];
+                    chrome.storage.local.set({ downloadedFileIDs: downloadedFileIDs });
+                    window.utils.closePopup();
+                }
+            })
+
         ])
     );
 };

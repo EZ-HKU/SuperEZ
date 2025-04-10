@@ -101,6 +101,15 @@
         "https://moodle.hku.hk/mod/*/view.php?id=*"
       ],
       "type": "module"
+    },
+
+    {
+      "matches": [
+        "https://moodle.hku.hk/course/view.php?id=*"
+      ],
+      "js": [
+        "scripts/superload/js/download.js"
+      ]
     }
   ],
   "permissions":  [
