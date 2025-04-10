@@ -19,13 +19,11 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_es.md">Español</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ja.md">日本語</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ru.md">Русский</a> |
-        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_pt-br.md">Рortuguês</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_te.md">తెలుగు</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_fr.md">Français</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_de.md">Deutsch</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_vi.md">Tiếng Việt</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ar.md">العربية</a> |
-        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">اردو</a> |
     </p>
 </h4>
 更好的網上香港大學體驗，與SuperEZ

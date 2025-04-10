@@ -19,13 +19,11 @@
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_es.md">스페인어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ja.md">일본어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ru.md">러시아어</a> |
-        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_pt-br.md">포르투갈어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_te.md">텔루구어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_fr.md">프랑스어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_de.md">독일어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_vi.md">베트남어</a> |
         <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ar.md">아랍어</a> |
-        <a href="https://github.com/EZ-HKU/SuperEZ/blob/main/mlp/README_ur.md">우르두어</a> |
     </p>
 </h4>
 슈퍼EZ로 더 나은 온라인 HKU 경험
