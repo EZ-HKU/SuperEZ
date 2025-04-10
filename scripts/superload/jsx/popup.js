@@ -33,15 +33,13 @@ function findPDFLinks() {
             });
         }
     }
-    console.log(fileLinks);
     return fileLinks;
 }
 
 window.popup.SuperLoadPopup = async function () {
     let fileLinks = findPDFLinks();
     let posibleFileTypes = ['pdf', 'file', 'powerpoint', 'spreadsheet', 'archive', 'document', 'video', 'image'];
-    let downloadedFileIDs = (await window.utils.getStorage('downloadedFileIDs')).downloadedFileIDs || [];
-    console.log(downloadedFileIDs);
+    let downloadedFileIDs = (await window.utils.getStorageLocal('downloadedFileIDs')).downloadedFileIDs || [];
     return (
         window.elements.Div({
             id: "ez-superload-file-links",
@@ -195,6 +193,44 @@ window.popup.SuperLoadPopup = async function () {
                             ]);
                         })
                     ),
+                    window.elements.Tr({}, [
+                        window.elements.Td({
+                            style: {
+                                padding: "8px",
+                                textAlign: "center",
+                            },
+                        },[
+                            window.elements.Input({
+                                type: "checkbox",
+                                id: "ez-superload-auto-download",
+                                onClick: (e) => {
+                                    let course = document.querySelector('.h2').textContent;
+                                    chrome.storage.sync.get(['autoDownloadCourses'], function (items) {
+                                        if (!items.autoDownloadCourses) {
+                                            items.autoDownloadCourses = [];
+                                        }
+                                        if (e.target.checked) {
+                                            if (!items.autoDownloadCourses.includes(course)) {
+                                                items.autoDownloadCourses.push(course);
+                                            }
+                                        } else {
+                                            items.autoDownloadCourses = items.autoDownloadCourses.filter(item => item !== course);
+                                        }
+                                        chrome.storage.sync.set({ autoDownloadCourses: items.autoDownloadCourses });
+                                    });
+                                },
+                                checked: (await window.utils.getStorage('autoDownloadCourses')).autoDownloadCourses?.includes(document.querySelector('.h2').textContent) || false,
+                            }),
+                        ]),
+                        window.elements.Td({
+                            style: {
+                                padding: "8px",
+                                textAlign: "left",
+                            },
+                        }, [
+                            window.elements.Text("Check to auto Download this course")
+                        ]),
+                    ]),
                 ]),
             ]),
             window.elements.Button({
@@ -232,7 +268,7 @@ window.popup.SuperLoadPopup = async function () {
                         saveAs: false
                     });
                     downloadedFileIDs = [...new Set([...downloadedFileIDs, ...fileIDs])];
-                    chrome.storage.sync.set({ downloadedFileIDs: downloadedFileIDs });
+                    chrome.storage.local.set({ downloadedFileIDs: downloadedFileIDs });
                     window.utils.closePopup();
                 }
             })

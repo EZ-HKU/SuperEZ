@@ -11,6 +11,13 @@ window.utils.getStorage = (keys) =>
         });
     });
 
+window.utils.getStorageLocal = (keys) =>
+    new Promise((resolve, reject) => {
+        chrome.storage.local.get(keys, (items) => {
+            resolve(items);
+        });
+    });
+
 window.utils.setPopup = (popup, custom) => {
     if (!custom) {
         custom = {
