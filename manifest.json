@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SuperEZ",
-  "version": "1.2.0-25-04-15-beta",
+  "version": "1.2.0-25-04-15-05-35-58-beta",
   "description": "Better online HKU experience with SuperEZ",
   "background": {
     "service_worker": "scripts/background.js"
