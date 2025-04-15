@@ -35,7 +35,7 @@ jobs:
           VERSION=$(jq -r '.version' manifest.json)
           # check how many numbers are in the version string
           VERSION_NUMBERS=$(echo $VERSION | grep -o '\.' | wc -l)
-          if [ $VERSION_NUMBERS -eq 3 ]; then
+          if [ $VERSION_NUMBERS -eq 2 ]; then
             VERSION="${VERSION}.0"
           fi
           # check the last number of the version string
@@ -61,6 +61,11 @@ jobs:
         id: set_ext_name
         run: |
           jq --arg v "SuperEZ BETA" '.name = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+        
+      - name: Set discription
+        id: set_ext_discription
+        run: |
+          jq --arg v "Better online HKU experience with SuperEZ (THIS EXTENSION IS FOR BETA TESTING)" '.description = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
       
       - name: Update version in Help.js
         run: |
