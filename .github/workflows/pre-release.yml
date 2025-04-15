@@ -32,22 +32,35 @@ jobs:
       - name: Get main version from manifest.json
         id: get_main_version
         run: |
-          RAW_VERSION=$(jq -r '.version' manifest.json)
-          VERSION=$(echo $RAW_VERSION | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+          VERSION=$(jq -r '.version' manifest.json)
+          # check how many numbers are in the version string
+          VERSION_NUMBERS=$(echo $VERSION | grep -o '\.' | wc -l)
+          if [ $VERSION_NUMBERS -eq 3 ]; then
+            VERSION="${VERSION}.0"
+          fi
+          # check the last number of the version string
+          LAST_NUMBER=$(echo $VERSION | awk -F. '{print $NF}')
+          WITHOUT_LAST_NUMBER=$(echo $VERSION | sed 's/\.[0-9]*$//')
+          VERSION="${WITHOUT_LAST_NUMBER}.$((LAST_NUMBER + 1))"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Get date
         id: get_date
         run: |
-          DATE=$(date +'%y-%m-%d-%H-%M-%S')
+          DATE=$(date +'%y%m%d%S')
           echo "DATE=$DATE" >> $GITHUB_ENV
 
       - name: Set pre-release version
         id: set_version
         run: |
-          PRE_VERSION="${VERSION}-${DATE}-beta"
+          PRE_VERSION="${VERSION}"
           jq --arg v "$PRE_VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
           echo "PRE_VERSION=$PRE_VERSION" >> $GITHUB_ENV
+      
+      - name: Set to SuperEZ BETA
+        id: set_ext_name
+        run: |
+          jq --arg v "SuperEZ BETA" '.name = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
       
       - name: Update version in Help.js
         run: |
