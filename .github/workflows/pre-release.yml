@@ -47,7 +47,7 @@ jobs:
       
       - name: Update version in Help.js
         run: |
-          sed -i "s/innerText: \"v.*?\"/innerText: \"$PRE_VERSION\"/" scripts/help/jsx/Help.js
+          sed -i "s/innerText: \"v.*\"/innerText: \"$PRE_VERSION\"/" scripts/help/jsx/Help.js
 
       - name: Commit version bump
         run: |
