@@ -1,0 +1,63 @@
+name: Pre-release on dev PR merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - dev
+
+jobs:
+  pre-release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get main version from manifest.json
+        id: get_main_version
+        run: |
+          RAW_VERSION=$(jq -r '.version' manifest.json)
+          VERSION=$(echo $RAW_VERSION | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Get date
+        id: get_date
+        run: |
+          DATE=$(date +'%y-%m-%d')
+          echo "DATE=$DATE" >> $GITHUB_ENV
+
+      - name: Set pre-release version
+        id: set_version
+        run: |
+          PRE_VERSION="${VERSION}-${DATE}-beta"
+          jq --arg v "$PRE_VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+          echo "PRE_VERSION=$PRE_VERSION" >> $GITHUB_ENV
+      
+      - name: Update version in Help.js
+        run: |
+          $content = Get-Content scripts/help/jsx/Help.js
+          $content = $content -replace 'innerText: "v.*?"', 'innerText: "${{ env.PRE_VERSION }}"'
+          Set-Content scripts/help/jsx/Help.js $content
+        shell: pwsh
+
+      - name: Commit version bump
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "chore: bump version to $PRE_VERSION [pre-release]" || echo "No changes to commit"
+          git push
+
+      - name: Create pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.PRE_VERSION }}
+          name: ${{ env.PRE_VERSION }}
+          prerelease: true
+          generate_release_notes: true
