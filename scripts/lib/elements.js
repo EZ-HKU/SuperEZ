@@ -178,6 +178,13 @@ window.elements.A = function (custom, inner) {
     });
 };
 
+window.elements.Span = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let spanContainer = document.createElement("span");
+        return spanContainer;
+    });
+};
+
 window.elements.Br = function (custom, inner) {
     return ezReactElements.createElement(custom, inner, () => {
         let brContainer = document.createElement("br");
