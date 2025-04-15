@@ -57,6 +57,11 @@ jobs:
           jq --arg v "$PRE_VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
           echo "PRE_VERSION=$PRE_VERSION" >> $GITHUB_ENV
       
+      - name: Set to SuperEZ BETA
+        id: set_ext_name
+        run: |
+          jq --arg v "SuperEZ BETA" '.name = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+      
       - name: Update version in Help.js
         run: |
           sed -i "s/innerText: \"v.*\"/innerText: \"$PRE_VERSION\"/" scripts/help/jsx/Help.js
