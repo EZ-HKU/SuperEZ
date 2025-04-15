@@ -50,7 +50,7 @@ async function renderGuidancePage() {
         ]),
         window.elements.Div({ className: 'ez-guidance-tip' }, [
             window.elements.Text(messages.guide_moodle_tip2),
-            window.elements.A({ href: 'https://github.com/EZ-HKU/SuperEZ/wiki', style: { marginLeft: '4px' } }, [window.elements.Text('Github Wiki')])
+            window.elements.A({ href: 'https://github.com/EZ-HKU/SuperEZ/wiki', style: { marginLeft: '4px' } }, [window.elements.Text('GitHub Wiki')])
         ]),
         window.elements.Button({ className: 'next-btn', style: { opacity: 0 } }, [window.elements.Text(messages.guide_next_btn)]),
     ]);
