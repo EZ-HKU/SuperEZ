@@ -1,0 +1,18 @@
+{
+    "guide_welcome_title": "感谢安装SuperEZ！",
+    "guide_welcome_desc1": "此教程将用两步引导你配置插件。",
+    "guide_welcome_desc2": "让我们开始吧！首先，请将光标置于屏幕右下角。",
+    "guide_login_title": "自动登录",
+    "guide_login_desc1": "你成功呼出了悬浮窗！你可以在此使用我们的所有功能。",
+    "guide_login_desc2": "现在，点击悬浮窗中的⚙️，进入设置页面添加你的账户。",
+    "guide_login_desc3": "登陆账号后，SuperEZ可以帮助你自动登录所有HKU服务。当右下角出现🤖图标时，代表自动登录正在运行。",
+    "guide_login_tip1": "📌 请放心，你的账号密码将会被保存到浏览器，我们无法获取任何数据。",
+    "guide_login_tip2": "📌 你可以再次点击账号以删除。",
+    "guide_moodle_title": "mO.odle",
+    "guide_moodle_desc1": "你已成功添加HKU账号！点击空白处可关闭弹窗。",
+    "guide_moodle_desc2": "现在，你可以点击右下角橙色的📚前往Moodle。",
+    "guide_moodle_desc3": "SuperEZ会捕捉所有当前学年的课程，在Available Courses中选择你想添加的课程。",
+    "guide_moodle_tip1": "📌 你可以在地址栏输入e+Tab并输入课程代码(模糊匹配) 进行快速跳转",
+    "guide_moodle_tip2": "📌 更多功能介绍请查看我们的Github Wiki",
+    "guide_next_btn": "下一步"
+  }

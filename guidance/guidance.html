@@ -1,42 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
-    <title>引导页面</title>
-</head>
-
-<body>
-    <div class="guide-container">
-        <div class="guide-wrapper">
-            <div class="step-card">
-                <div style="text-align: right; padding-right: 40px;">
-                    <img src="../images/ez.png" alt="" width="100px">
-                </div>
-                <h1>感谢安装SuperEZ！</h1>
-                <p>此教程将用两步引导你配置插件。</p>
-                <p>让我们开始吧！首先，请将光标置于屏幕右下角。</p>
-            </div>
-            <div class="step-card">
-                <h1>自动登录</h1>
-                <p>你成功呼出了悬浮窗！你可以在此使用我们的所有功能。</p>
-                <p>现在，点击悬浮窗中的⚙️，进入设置页面添加你的账户。</p>
-                <p>登陆账号后，SuperEZ可以帮助你自动登录所有HKU服务。当右下角出现🤖图标时，代表自动登录正在运行。</p>
-                <div class="ez-guidance-tip">📌 请放心，你的账号密码将会被保存到浏览器，我们无法获取任何数据。</div>
-                <div class="ez-guidance-tip">📌 你可以再次点击账号以删除。</div>
-            </div>
-            <div class="step-card">
-                <h1>mO.odle</h1>
-                <p>你已成功添加HKU账号！点击空白处可关闭弹窗。</p>
-                <p>现在，你可以点击右下角橙色的📚前往Moodle。</p>
-                <p>SuperEZ会捕捉所有当前学年的课程，在Available Courses中选择你想添加的课程。</p>
-                <div class="ez-guidance-tip">📌 你可以在地址栏输入<span style="font-family: 'Cascadia Code';">e+Tab</span>并输入课程代码(模糊匹配) 进行快速跳转</div>
-                <div class="ez-guidance-tip">📌 更多功能介绍请查看我们的<a href="https://github.com/EZ-HKU/SuperEZ/wiki">Github Wiki</a></div>
-                <button class="next-btn" style="opacity: 0;">下一步</button>
-            </div>
-        </div>
-    </div>
-
+    <title>Guidance</title>
     <script src="../scripts/lib/ezReact.js"></script>
     <script src="../scripts/lib/elements.js"></script>
     <script src="../scripts/lib/utils.js"></script>
@@ -50,10 +16,9 @@
     <link rel="stylesheet" href="../styles/navigator.css">
     <link rel="stylesheet" href="../styles/fasthku.css">
     <link rel="stylesheet" href="../styles/moodle.css">
-    <script src="./guidance.js"></script>
     <link rel="stylesheet" href="./guidance.css">
-
-
+</head>
+<body>
+    <script src="./guidance.js"></script>
 </body>
-
 </html>
