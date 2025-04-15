@@ -42,8 +42,7 @@ jobs:
       - name: Update version in Help.js
         run: |
           $content = Get-Content scripts/help/jsx/Help.js
-          $content = $content -replace 'innerText: "v.*?"', 'innerText: "${{ env.PRE_VERSION }}"'
-          Set-Content scripts/help/jsx/Help.js $content
+          $content = $content -replace 'innerText: "v.*?"', "innerText: '$env:PRE_VERSION'"
         shell: pwsh
 
       - name: Commit version bump
