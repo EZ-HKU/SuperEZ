@@ -79,3 +79,4 @@ jobs:
           name: ${{ env.PRE_VERSION }}
           prerelease: true
           generate_release_notes: true
+          target_commitish: dev
