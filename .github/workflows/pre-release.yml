@@ -5,12 +5,13 @@ on:
     types: [closed]
     branches:
       - dev
-  # push:
-  #   branches:
-  #     - dev
 
 jobs:
   pre-release:
+    # Skip if the PR was created by this action to prevent infinite loop
+    if: |
+      github.event.pull_request.merged == true &&
+      !contains(github.event.pull_request.labels.*.name, 'automated-version-bump')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,6 +20,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: dev
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -49,13 +52,24 @@ jobs:
         run: |
           sed -i "s/innerText: \"v.*\"/innerText: \"$PRE_VERSION\"/" scripts/help/jsx/Help.js
 
-      - name: Commit version bump
+      - name: Create version bump PR
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/version-bump-${{ env.DATE }}
+          commit-message: "chore: bump version to ${{ env.PRE_VERSION }} [pre-release]"
+          title: "chore: bump version to ${{ env.PRE_VERSION }}"
+          body: "Automated version bump to ${{ env.PRE_VERSION }}"
+          labels: automated-version-bump
+          base: dev
+
+      - name: Auto-merge the version bump PR
+        if: steps.create-pr.outputs.pull-request-number != ''
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add manifest.json
-          git commit -m "chore: bump version to $PRE_VERSION [pre-release]" || echo "No changes to commit"
-          git push
+          gh pr merge --auto --merge ${{ steps.create-pr.outputs.pull-request-number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create pre-release
         uses: softprops/action-gh-release@v2
