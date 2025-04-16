@@ -100,9 +100,7 @@ jobs:
           target_commitish: dev
       
       - name: zip files
-        run: |
-          $filePath = "SuperEZ_v${{ env.PRE_VERSION }}.zip"
-          7z a $filePath .
+        run: 7z a SuperEZ_v${{ env.PRE_VERSION }}.zip .
 
       - name: publish to Chrome Web Store
         uses: mnao305/chrome-extension-upload@v5.0.0
