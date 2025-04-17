@@ -69,7 +69,7 @@ jobs:
       
       - name: Update version in Help.js
         run: |
-          sed -i "s/innerText: \"v.*\"/innerText: \"$PRE_VERSION\"/" scripts/help/jsx/Help.js
+          sed -i "s/innerText: \"v.*\"/innerText: \"v$PRE_VERSION\"/" scripts/help/jsx/Help.js
 
       - name: Create version bump PR
         id: create-pr
@@ -98,9 +98,22 @@ jobs:
           prerelease: true
           generate_release_notes: true
           target_commitish: dev
+
+  publish:
+    needs: pre-release
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true &&
+      !contains(github.event.pull_request.labels.*.name, 'automated-version-bump')
+    
+    steps:
+      - name: Checkout code again
+        uses: actions/checkout@v4
+        with:
+          ref: dev
       
       - name: zip files
-        run: 7z a SuperEZ_v${{ env.PRE_VERSION }}.zip .
+        run: 7z a SuperEZ.zip .
 
       - name: publish to Chrome Web Store
         uses: mnao305/chrome-extension-upload@v5.0.0
@@ -109,4 +122,4 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-          file-path: ./SuperEZ_v${{ env.PRE_VERSION }}.zip
+          file-path: ./SuperEZ.zip
