@@ -9,53 +9,53 @@ function get_psb() {
             }
         }
         var psb_list = new window.courseType.CourseCodeList();
-            var dates = document.querySelectorAll(".categoryname");
-            if (data.course_code_list) {
-                var course_code_list =
-                    window.courseType.courseCodeListFromStorage(
-                        data.course_code_list
-                    );
-            } else {
-                var course_code_list = new window.courseType.CourseCodeList();
-            }
-            const currentDate = new Date();
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            let startYear, endYear;
-            if (month < 7) {
-                startYear = year-1;
-                endYear = year;
-            } else {
-                startYear = year;
-                endYear = year + 1;
-            }
-            let yearRange = `${startYear}-${endYear.toString().slice(-2)}`;
-            console.log({yearRange});
-            for (let i = 0; i < dates.length; i++) {
-                let date = dates[i];
-                if (date.innerText == yearRange) {
-                    var course_div =
-                        date.parentNode.previousElementSibling
-                            .firstElementChild;
-                    var title = course_div.innerText;
-                    if (course_code_list.findCourseByTitle(title)) {
-                        console.log("already added:", title);
-                        continue;
-                    }
-                    var code = title.substring(0, 8);
-                    var detail = title.substring(9);
-                    var url = course_div.href;
-                    var course = new window.courseType.Course(
-                        title,
-                        code,
-                        detail,
-                        url
-                    );
-                    psb_list.addCourse(course);
+        var dates = document.querySelectorAll(".categoryname");
+        if (data.course_code_list) {
+            var course_code_list =
+                window.courseType.courseCodeListFromStorage(
+                    data.course_code_list
+                );
+        } else {
+            var course_code_list = new window.courseType.CourseCodeList();
+        }
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        let startYear, endYear;
+        if (month < 7) {
+            startYear = year - 1;
+            endYear = year;
+        } else {
+            startYear = year;
+            endYear = year + 1;
+        }
+        let yearRange = `${startYear}-${endYear.toString().slice(-2)}`;
+        console.log({ yearRange });
+        for (let i = 0; i < dates.length; i++) {
+            let date = dates[i];
+            if (date.innerText == yearRange) {
+                var course_div =
+                    date.parentNode.previousElementSibling
+                        .firstElementChild;
+                var title = course_div.innerText;
+                if (course_code_list.findCourseByTitle(title)) {
+                    console.log("already added:", title);
+                    continue;
                 }
+                var code = title.substring(0, 8);
+                var detail = title.substring(9);
+                var url = course_div.href;
+                var course = new window.courseType.Course(
+                    title,
+                    code,
+                    detail,
+                    url
+                );
+                psb_list.addCourse(course);
             }
-            chrome.storage.sync.set({ psb_list: psb_list });
-            console.log("psb:", psb_list);
+        }
+        chrome.storage.sync.set({ psb_list: psb_list });
+        console.log("psb:", psb_list);
     });
 }
 
@@ -259,6 +259,93 @@ function CourePage_handler() {
     });
 }
 
+function jumpToExamBase() {
+    const className = document.querySelector(".h2.mb-0").textContent.substring(0, 8);
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+
+    const navTabs = document.querySelectorAll("[id*='nav-tabs']");
+    if (navTabs.length > 0) {
+        const jumpTab = navTabs[0].querySelector("li:nth-child(2)").cloneNode(true);
+        // const jumpTab = document.createElement("div");
+        jumpTab.id = "jump-to-exam-base";
+
+        // 添加炫彩发光效果的CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            #jump-to-exam-base a {
+                position: relative;
+                font-weight: bold !important;
+                background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+                background-size: 400% 400%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: rainbow 3s ease infinite, pulse 1.5s infinite alternate;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+            
+            #jump-to-exam-base a::before {
+                content: "";
+                position: absolute;
+                top: -3px;
+                left: -3px;
+                right: -3px;
+                bottom: -3px;
+                border-radius: 5px;
+                background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+                background-size: 400% 400%;
+                z-index: -1;
+                filter: blur(8px);
+                animation: rainbow 3s ease infinite;
+                opacity: 0.7;
+            }
+            
+            #jump-to-exam-base {
+                position: relative;
+                transform: scale(1.1);
+                z-index: 10;
+                margin: 0 5px;
+            }
+            
+            @keyframes rainbow {
+                0% { background-position: 0% 50% }
+                50% { background-position: 100% 50% }
+                100% { background-position: 0% 50% }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        jumpTab.querySelector("a").textContent = "✨ Exam Base ✨";
+        jumpTab.querySelector("a").href =
+            "https://exambase-lib-hku-hk.eproxy.lib.hku.hk/exhibits/show/exam/home?the_key=" + className + "&the_field=crs&fromYear=" + (year - 10).toString() + "&toYear=" + year.toString() + "&the_sem1=on&the_sem2=on&the_ptype1=on&the_ptype2=on&the_no_result=20&the_sort=t";
+        jumpTab.querySelector("a").target = "_blank";
+
+        // 添加闪烁效果
+        let blinkCount = 0;
+        const blinkInterval = setInterval(() => {
+            if (blinkCount >= 5) {
+                clearInterval(blinkInterval);
+                return;
+            }
+
+            jumpTab.style.opacity = "0.3";
+            setTimeout(() => {
+                jumpTab.style.opacity = "1";
+            }, 200);
+
+            blinkCount++;
+        }, 400);
+        // append the new tab to the navTabs
+        navTabs[0].appendChild(jumpTab);
+    }
+}
+
 function popupOnStart() {
     chrome.runtime
         .sendMessage({
@@ -277,6 +364,7 @@ const route = () => {
     if (currentURL.includes("moodle.hku.hk/course/view.php") || (currentURL.includes("https://moodle.hku.hk/mod/") && currentURL.includes("view.php"))) {
         // 课程页面
         CourePage_handler();
+        jumpToExamBase();
     } else if (currentURL.includes("moodle.hku.hk/my/courses.php")) {
         // my courses
         CourseList_handler();
@@ -290,8 +378,8 @@ const route = () => {
         get_psb();
         initialize();
         popupOnStart();
-    } ;
-    
+    };
+
     if (currentURL.includes("https://moodle.hku.hk/course/view.php?id=")) {
         window.navigatorUtils.customizeCenter({
             style: {
