@@ -267,9 +267,14 @@ function jumpToExamBase() {
 
     const navTabs = document.querySelectorAll("[id*='nav-tabs']");
     if (navTabs.length > 0) {
-        const jumpTab = navTabs[0].querySelector("li:nth-child(2)").cloneNode(true);
-        // const jumpTab = document.createElement("div");
+        const jumpTab = document.createElement("div");
         jumpTab.id = "jump-to-exam-base";
+        jumpTab.style.position = "fixed";
+        jumpTab.style.left = "50vw";
+        jumpTab.style.top = "30vh";
+        jumpTab.style.cursor = "pointer";
+        jumpTab.style.transition = "all 0.2s, filter 0.2s";
+        jumpTab.style.zIndex = 9999;
 
         // 添加炫彩发光效果的CSS
         const style = document.createElement('style');
@@ -284,7 +289,6 @@ function jumpToExamBase() {
                 animation: rainbow 3s ease infinite, pulse 1.5s infinite alternate;
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             }
-            
             #jump-to-exam-base a::before {
                 content: "";
                 position: absolute;
@@ -300,20 +304,18 @@ function jumpToExamBase() {
                 animation: rainbow 3s ease infinite;
                 opacity: 0.7;
             }
-            
             #jump-to-exam-base {
-                position: relative;
+                position: fixed !important;
                 transform: scale(1.1);
-                z-index: 10;
+                z-index: 9999;
                 margin: 0 5px;
+                pointer-events: auto;
             }
-            
             @keyframes rainbow {
                 0% { background-position: 0% 50% }
                 50% { background-position: 100% 50% }
                 100% { background-position: 0% 50% }
             }
-            
             @keyframes pulse {
                 0% { transform: scale(1); }
                 100% { transform: scale(1.1); }
@@ -321,28 +323,75 @@ function jumpToExamBase() {
         `;
         document.head.appendChild(style);
 
-        jumpTab.querySelector("a").textContent = "✨ Exam Base ✨";
-        jumpTab.querySelector("a").href =
+        const jumpLink = document.createElement("a");
+        jumpLink.href =
             "https://exambase-lib-hku-hk.eproxy.lib.hku.hk/exhibits/show/exam/home?the_key=" + className + "&the_field=crs&fromYear=" + (year - 10).toString() + "&toYear=" + year.toString() + "&the_sem1=on&the_sem2=on&the_ptype1=on&the_ptype2=on&the_no_result=20&the_sort=t";
-        jumpTab.querySelector("a").target = "_blank";
+        jumpLink.target = "_blank";
+        jumpLink.textContent = "✨ Exam Base ✨";
+        jumpTab.appendChild(jumpLink);
 
-        // 添加闪烁效果
-        let blinkCount = 0;
-        const blinkInterval = setInterval(() => {
-            if (blinkCount >= 5) {
-                clearInterval(blinkInterval);
-                return;
+        document.body.appendChild(jumpTab);
+
+        // 随机飘动动画
+        let vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        let pos = { x: vw / 2, y: vh / 3 };
+        let dx = (0.5 + 0.5 * Math.random()) * 10;
+        let dy = (0.5 + 0.5 * Math.random()) * 10;
+        let benchmark = { x: dx, y: dy };
+        console.log({benchmark});
+
+        window.addEventListener('resize', () => {
+            vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        });
+
+        setInterval(() => {
+            var rect = jumpTab.getBoundingClientRect();
+            pos.x += dx;
+            pos.y += dy;
+            if (pos.x < 0 || pos.x > vw - rect.width) {
+                dx = -dx;
+                pos.x = Math.max(0, Math.min(pos.x, vw - rect.width));
             }
+            if (pos.y < 0 || pos.y > vh - rect.height) {
+                dy = -dy;
+                pos.y = Math.max(0, Math.min(pos.y, vh - rect.height));
+            }
+            dx = Math.abs(dx) > Math.abs(benchmark.x) ? dx * 0.8 : dx;
+            dy = Math.abs(dy) > Math.abs(benchmark.y) ? dy * 0.8 : dy;
 
-            jumpTab.style.opacity = "0.3";
-            setTimeout(() => {
-                jumpTab.style.opacity = "1";
-            }, 200);
+            // if (Math.random() < 0.005) {
+            //     benchmark.x += (Math.random() - 0.5) * 50;
+            //     benchmark.y += (Math.random() - 0.5) * 50;
+            //     console.log({benchmark});
+            // }
+            
+            jumpTab.style.left = pos.x + "px";
+            jumpTab.style.top = pos.y + "px";
+        }, 50);
 
-            blinkCount++;
-        }, 400);
-        // append the new tab to the navTabs
-        navTabs[0].appendChild(jumpTab);
+        var maxSpeed = 30;
+        document.addEventListener('mousemove', (e) => {
+            var rect = jumpTab.getBoundingClientRect();
+            if (Math.abs(e.clientX - (rect.left + rect.width / 2)) + Math.abs(e.clientY - (rect.top + rect.height / 2)) < 150) {
+                dx = dx + -1 / (e.clientX - (rect.left + rect.width / 2)) * 150;
+                dy = dy + -1 / (e.clientY - (rect.top + rect.height / 2)) * 150;
+                dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+                dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+            }
+        });
+
+
+        // 悬停时变大旋转
+        jumpTab.addEventListener('mouseenter', () => {
+            jumpTab.style.transform = 'scale(1.3) rotate(-10deg)';
+            jumpTab.style.filter = 'brightness(1.5)';
+        });
+        jumpTab.addEventListener('mouseleave', () => {
+            jumpTab.style.transform = 'scale(1.1)';
+            jumpTab.style.filter = '';
+        });
     }
 }
 
