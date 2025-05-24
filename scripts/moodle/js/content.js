@@ -400,8 +400,14 @@ function jumpToExamBase() {
     document.addEventListener('mousemove', (e) => {
         var rect = jumpTab.getBoundingClientRect();
         if (Math.abs(e.clientX - (rect.left + rect.width / 2)) + Math.abs(e.clientY - (rect.top + rect.height / 2)) < 150) {
-            dx = dx + -1 / (e.clientX - (rect.left + rect.width / 2)) * 150;
-            dy = dy + -1 / (e.clientY - (rect.top + rect.height / 2)) * 150;
+            let deltaX = e.clientX - (rect.left + rect.width / 2);
+            let deltaY = e.clientY - (rect.top + rect.height / 2);
+            if (deltaX !== 0) {
+                dx = dx + -1 / deltaX * 150;
+            }
+            if (deltaY !== 0) {
+                dy = dy + -1 / deltaY * 150;
+            }
             dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
             dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
         }
