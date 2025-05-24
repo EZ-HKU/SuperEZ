@@ -265,21 +265,58 @@ function jumpToExamBase() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
 
-    const navTabs = document.querySelectorAll("[id*='nav-tabs']");
-    if (navTabs.length > 0) {
-        const jumpTab = document.createElement("div");
-        jumpTab.id = "jump-to-exam-base";
-        jumpTab.style.position = "fixed";
-        jumpTab.style.left = "50vw";
-        jumpTab.style.top = "30vh";
-        jumpTab.style.cursor = "pointer";
-        jumpTab.style.transition = "all 0.2s, filter 0.2s";
-        jumpTab.style.zIndex = 9999;
+    const jumpTabFixed = document.createElement("li");
+    jumpTabFixed.classList.add("nav-item");
+    jumpTabFixed.id = "jump-to-exam-base-fixed";
+    
+    const jumpTabFixedInner = document.createElement("a");
+    jumpTabFixedInner.innerText = "Exam Base";
+    jumpTabFixedInner.classList.add("nav-link");
+    jumpTabFixed.appendChild(jumpTabFixedInner);
 
-        // 添加炫彩发光效果的CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            #jump-to-exam-base a {
+    jumpTabFixed.addEventListener("click", () => {
+        window.open(
+            "https://exambase-lib-hku-hk.eproxy.lib.hku.hk/exhibits/show/exam/home?the_key=" + className + "&the_field=crs&fromYear=" + (year - 10).toString() + "&toYear=" + year.toString() + "&the_sem1=on&the_sem2=on&the_ptype1=on&the_ptype2=on&the_no_result=20&the_sort=t",
+            "_blank");
+    });
+
+    const navTabs = document.querySelectorAll("[id*='nav-tabs']")[0];
+    navTabs.appendChild(jumpTabFixed);
+
+    const jumpTab = document.createElement("div");
+    jumpTab.id = "jump-to-exam-base";
+    jumpTab.style.position = "fixed";
+    jumpTab.style.left = "50vw";
+    jumpTab.style.top = "30vh";
+    jumpTab.style.cursor = "pointer";
+    jumpTab.style.transition = "all 0.2s, filter 0.2s";
+    jumpTab.style.zIndex = 9999;
+    jumpTab.innerText = "✨ Exam Base ✨";
+
+    let fly = true;
+    jumpTab.addEventListener("click", () => {
+        const fixedRect = jumpTabFixed.getBoundingClientRect();
+        const jumpTabRect = jumpTab.getBoundingClientRect();
+        fly = false;
+        jumpTab.style.left = `${fixedRect.left + fixedRect.width / 2 - jumpTabRect.width / 2}px`;
+        jumpTab.style.top = `${fixedRect.top + fixedRect.height / 2 - jumpTabRect.height / 2}px`;
+        jumpTab.style.transition = "all 1s ease-in-out";
+        setTimeout(() => {
+            jumpTab.style.opacity = "0";
+            jumpTabFixed.style.opacity = "1";
+        }, 1000);
+        setTimeout(() => {
+        jumpTab.style.display = "none";
+        window.open(
+            "https://exambase-lib-hku-hk.eproxy.lib.hku.hk/exhibits/show/exam/home?the_key=" + className + "&the_field=crs&fromYear=" + (year - 10).toString() + "&toYear=" + year.toString() + "&the_sem1=on&the_sem2=on&the_ptype1=on&the_ptype2=on&the_no_result=20&the_sort=t",
+            "_blank");
+        }, 2000);
+        chrome.storage.sync.set({ ExamBaseFly: false });
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `
+            #jump-to-exam-base {
                 position: relative;
                 font-weight: bold !important;
                 background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
@@ -289,7 +326,7 @@ function jumpToExamBase() {
                 animation: rainbow 3s ease infinite, pulse 1.5s infinite alternate;
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             }
-            #jump-to-exam-base a::before {
+            #jump-to-exam-base::before {
                 content: "";
                 position: absolute;
                 top: -3px;
@@ -321,32 +358,25 @@ function jumpToExamBase() {
                 100% { transform: scale(1.1); }
             }
         `;
-        document.head.appendChild(style);
+    document.head.appendChild(style);
+    document.body.appendChild(jumpTab);
 
-        const jumpLink = document.createElement("a");
-        jumpLink.href =
-            "https://exambase-lib-hku-hk.eproxy.lib.hku.hk/exhibits/show/exam/home?the_key=" + className + "&the_field=crs&fromYear=" + (year - 10).toString() + "&toYear=" + year.toString() + "&the_sem1=on&the_sem2=on&the_ptype1=on&the_ptype2=on&the_no_result=20&the_sort=t";
-        jumpLink.target = "_blank";
-        jumpLink.textContent = "✨ Exam Base ✨";
-        jumpTab.appendChild(jumpLink);
+    // 随机飘动动画
+    let vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let pos = { x: vw / 2, y: vh / 3 };
+    let dx = (0.5 + 0.5 * Math.random()) * 10;
+    let dy = (0.5 + 0.5 * Math.random()) * 10;
+    let benchmark = { x: dx, y: dy };
+    console.log({ benchmark });
 
-        document.body.appendChild(jumpTab);
+    window.addEventListener('resize', () => {
+        vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    });
 
-        // 随机飘动动画
-        let vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        let pos = { x: vw / 2, y: vh / 3 };
-        let dx = (0.5 + 0.5 * Math.random()) * 10;
-        let dy = (0.5 + 0.5 * Math.random()) * 10;
-        let benchmark = { x: dx, y: dy };
-        console.log({benchmark});
-
-        window.addEventListener('resize', () => {
-            vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-            vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        });
-
-        setInterval(() => {
+    setInterval(() => {
+        if (fly) {
             var rect = jumpTab.getBoundingClientRect();
             pos.x += dx;
             pos.y += dy;
@@ -361,38 +391,42 @@ function jumpToExamBase() {
             dx = Math.abs(dx) > Math.abs(benchmark.x) ? dx * 0.8 : dx;
             dy = Math.abs(dy) > Math.abs(benchmark.y) ? dy * 0.8 : dy;
 
-            // if (Math.random() < 0.005) {
-            //     benchmark.x += (Math.random() - 0.5) * 50;
-            //     benchmark.y += (Math.random() - 0.5) * 50;
-            //     console.log({benchmark});
-            // }
-            
             jumpTab.style.left = pos.x + "px";
             jumpTab.style.top = pos.y + "px";
-        }, 50);
+        }
+    }, 50);
 
-        var maxSpeed = 30;
-        document.addEventListener('mousemove', (e) => {
-            var rect = jumpTab.getBoundingClientRect();
-            if (Math.abs(e.clientX - (rect.left + rect.width / 2)) + Math.abs(e.clientY - (rect.top + rect.height / 2)) < 150) {
-                dx = dx + -1 / (e.clientX - (rect.left + rect.width / 2)) * 150;
-                dy = dy + -1 / (e.clientY - (rect.top + rect.height / 2)) * 150;
-                dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
-                dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
-            }
-        });
+    var maxSpeed = 30;
+    document.addEventListener('mousemove', (e) => {
+        var rect = jumpTab.getBoundingClientRect();
+        if (Math.abs(e.clientX - (rect.left + rect.width / 2)) + Math.abs(e.clientY - (rect.top + rect.height / 2)) < 150) {
+            dx = dx + -1 / (e.clientX - (rect.left + rect.width / 2)) * 150;
+            dy = dy + -1 / (e.clientY - (rect.top + rect.height / 2)) * 150;
+            dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+            dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+        }
+    });
 
 
-        // 悬停时变大旋转
-        jumpTab.addEventListener('mouseenter', () => {
-            jumpTab.style.transform = 'scale(1.3) rotate(-10deg)';
-            jumpTab.style.filter = 'brightness(1.5)';
-        });
-        jumpTab.addEventListener('mouseleave', () => {
-            jumpTab.style.transform = 'scale(1.1)';
-            jumpTab.style.filter = '';
-        });
-    }
+    // 悬停时变大旋转
+    jumpTab.addEventListener('mouseenter', () => {
+        jumpTab.style.transform = 'scale(1.3) rotate(-10deg)';
+        jumpTab.style.filter = 'brightness(1.5)';
+    });
+    jumpTab.addEventListener('mouseleave', () => {
+        jumpTab.style.transform = 'scale(1.1)';
+        jumpTab.style.filter = '';
+    });
+
+    chrome.storage.sync.get(["ExamBaseFly"], (data) => {
+        if (data.ExamBaseFly) {
+            jumpTabFixed.style.opacity = "0";
+            jumpTab.style.display = "block";
+        } else {
+            jumpTabFixed.style.opacity = "1";
+            jumpTab.style.display = "none";
+        }
+    });
 }
 
 function popupOnStart() {

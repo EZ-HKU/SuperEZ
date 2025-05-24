@@ -277,3 +277,10 @@ window.elements.Link = function (custom, inner) {
         return linkContainer;
     });
 }
+
+window.elements.Label = function (custom, inner) {
+    return ezReactElements.createElement(custom, inner, () => {
+        let labelContainer = document.createElement("label");
+        return labelContainer;
+    });
+};
