@@ -1,0 +1,126 @@
+name: Release on main PR merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  release:
+    # Skip if the PR was created by this action to prevent infinite loop
+    if: |
+      github.event.pull_request.merged == true &&
+      !contains(github.event.pull_request.labels.*.name, 'automated-version-bump')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get release version from manifest.json
+        id: get_release_version
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          # Extract a.b.c from version (remove .d if present for pre-release format)
+          if [[ $VERSION =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(\.([0-9]+))?$ ]]; then
+            MAJOR=${BASH_REMATCH[1]}
+            MINOR=${BASH_REMATCH[2]}
+            PATCH=${BASH_REMATCH[3]}
+            # Increment patch version for release
+            NEW_PATCH=$((PATCH + 1))
+            RELEASE_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
+          else
+            echo "Error: Invalid version format in manifest.json"
+            exit 1
+          fi
+          echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
+
+      - name: Get date
+        id: get_date
+        run: |
+          DATE=$(date +'%y%m%d%S')
+          echo "DATE=$DATE" >> $GITHUB_ENV
+
+      - name: Set release version in manifest
+        id: set_version
+        run: |
+          jq --arg v "$RELEASE_VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+      
+      - name: Set to SuperEZ (production name)
+        id: set_ext_name
+        run: |
+          jq --arg v "SuperEZ" '.name = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+        
+      - name: Set production description
+        id: set_ext_description
+        run: |
+          jq --arg v "Better online HKU experience with SuperEZ" '.description = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+      
+      - name: Update version in Help.js
+        run: |
+          sed -i "s/innerText: \"v.*\"/innerText: \"v$RELEASE_VERSION\"/" scripts/help/jsx/Help.js
+
+      - name: Create version bump PR
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/release-version-bump-${{ env.DATE }}
+          commit-message: "chore: bump version to ${{ env.RELEASE_VERSION }} [release]"
+          title: "chore: bump version to ${{ env.RELEASE_VERSION }}"
+          body: "Automated version bump to ${{ env.RELEASE_VERSION }} for release"
+          labels: automated-version-bump
+          base: main
+
+      - name: Auto-merge the version bump PR
+        if: steps.create-pr.outputs.pull-request-number != ''
+        run: |
+          gh pr merge --auto --merge ${{ steps.create-pr.outputs.pull-request-number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.RELEASE_VERSION }}
+          name: Release v${{ env.RELEASE_VERSION }}
+          prerelease: false
+          generate_release_notes: true
+          target_commitish: main
+
+  publish:
+    needs: release
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true &&
+      !contains(github.event.pull_request.labels.*.name, 'automated-version-bump')
+    
+    steps:
+      - name: Checkout code again
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      - name: Zip files
+        run: 7z a SuperEZ.zip .
+
+      - name: Publish to Chrome Web Store (Production)
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          extension-id: ${{ secrets.NOT_BETA_EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          file-path: ./SuperEZ.zip
