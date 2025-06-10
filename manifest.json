@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "SuperEZ",
-  "version": "1.2.0",
-  "description": "Better online HKU experience with SuperEZ",
+  "name": "SuperEZ BETA",
+  "version": "1.3.0.5",
+  "description": "Better online HKU experience with SuperEZ (THIS EXTENSION IS FOR BETA TESTING)",
   "background": {
     "service_worker": "scripts/background.js"
   },
@@ -10,11 +10,10 @@
     "page": "./guidance/guidance.html",
     "open_in_tab": true
   },
-
   "content_scripts": [
     {
       "matches": [
-        "https://lib.hku.hk/hkulauth*", 
+        "https://lib.hku.hk/hkulauth*",
         "https://moodle.hku.hk/*",
         "https://adfs.connect.hku.hk/*",
         "https://hkuportal.hku.hk/*",
@@ -41,12 +40,9 @@
       ],
       "run_at": "document_start"
     },
-
-
-
     {
       "matches": [
-        "https://lib.hku.hk/hkulauth*", 
+        "https://lib.hku.hk/hkulauth*",
         "https://hkuportal.hku.hk/cas/login*",
         "https://moodle.hku.hk/*",
         "https://adfs.connect.hku.hk/*",
@@ -60,11 +56,11 @@
     },
     {
       "matches": [
-        "https://lib.hku.hk/hkulauth*", 
+        "https://lib.hku.hk/hkulauth*",
         "https://moodle.hku.hk/",
         "https://moodle.hku.hk/login/index.php",
         "https://moodle.hku.hk/login/index.php?loginredirect=1",
-        "https://adfs.connect.hku.hk/adfs/ls*",  
+        "https://adfs.connect.hku.hk/adfs/ls*",
         "https://hkuportal.hku.hk/cas/aad*",
         "https://hkuportal.hku.hk/cas/login*",
         "https://hkuportal.hku.hk/login.html"
@@ -73,8 +69,6 @@
         "scripts/fasthku/js/login.js"
       ]
     },
-
-
     {
       "js": [
         "scripts/moodle/js/courseType.js"
@@ -102,7 +96,6 @@
       ],
       "type": "module"
     },
-
     {
       "matches": [
         "https://moodle.hku.hk/course/view.php?id=*"
@@ -112,11 +105,11 @@
       ]
     }
   ],
-  "permissions":  [
+  "permissions": [
     "storage",
     "tabs",
     "activeTab",
-    "cookies", 
+    "cookies",
     "downloads"
   ],
   "host_permissions": [
@@ -133,8 +126,15 @@
   "omnibox": {
     "keyword": "e"
   },
-  "web_accessible_resources": [{
-    "resources": ["images/setting.svg","icons/*.png"],
-    "matches": ["<all_urls>"]
-  }]
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/setting.svg",
+        "icons/*.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
 }

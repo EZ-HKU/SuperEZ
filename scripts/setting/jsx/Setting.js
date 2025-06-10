@@ -34,7 +34,7 @@ async function saveUser(username, password) {
             // add data to list
             data_list.push(data);
             // save list to storage
-            chrome.storage.sync.set({ list: data_list }, function () {});
+            chrome.storage.sync.set({ list: data_list }, function () { });
 
             if (data_list.length === 1) {
                 // save data to storage
@@ -53,12 +53,12 @@ async function saveUser(username, password) {
     return await result;
 }
 
-window.popup.SetUserForm = function(custom, inner) {
+window.popup.SetUserForm = function (custom, inner) {
     async function onSubmit(e) {
         e.preventDefault();
         var username = document.getElementById("fasthku-username").value;
         var password = document.getElementById("fasthku-password").value;
-        if (username.includes("@connect.hku.hk")){
+        if (username.includes("@connect.hku.hk")) {
             username = username.split("@")[0];
         }
 
@@ -110,13 +110,13 @@ window.popup.SetUserForm = function(custom, inner) {
                     type: "text",
                     id: "fasthku-username",
                     placeholder: "Username",
-                    style : textInputStyle
+                    style: textInputStyle
                 }),
                 window.elements.Input({
                     type: "password",
                     id: "fasthku-password",
                     placeholder: "Password",
-                    style : textInputStyle
+                    style: textInputStyle
                 }),
                 window.elements.Button({
                     id: "fasthku-submit",
@@ -168,6 +168,40 @@ function LogoutButton(custom, inner) {
     });
 }
 
+async function ExamBaseButton(custom, inner) {
+    return window.elements.Div({}, [
+        window.elements.Input(
+            {
+                type: "checkbox",
+                id: "ez-exam-base-checkbox",
+                style: {
+                    width: "20px",
+                    height: "20px",
+                    marginRight: "10px",
+                    marginTop: "5px",
+                },
+                checked: (await window.utils.getStorage('ExamBaseFly')).ExamBaseFly || false,
+                onClick: async function (e) {
+                    let isChecked = e.target.checked;
+                    await chrome.storage.sync.set({
+                        ExamBaseFly: isChecked,
+                    });
+                    
+                },
+            }, []
+        ),
+        window.elements.Label({
+            htmlFor: "ez-exam-base-checkbox",
+            innerText: "Skyrocketing Exam Base",
+            style: {
+                fontSize: "16px",
+                fontWeight: "bold",
+                color: "#555555",
+            },
+        }),
+    ])
+}
+
 
 function SettingBlock(name, element) {
     return window.elements.Div({
@@ -198,9 +232,10 @@ window.popup.SettingPopup = async function SettingPopup(custom, inner) {
                 width: "100%",
                 margin: "auto",
             }
-        },[
+        }, [
             SettingBlock("Set User", window.popup.SetUserForm()),
             SettingBlock("Quick Logout", LogoutButton()),
+            SettingBlock("Exam Base", await ExamBaseButton()),
         ]
         )
     )

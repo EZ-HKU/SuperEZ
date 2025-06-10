@@ -1,0 +1,18 @@
+{
+    "guide_welcome_title": "Thank you for installing SuperEZ!",
+    "guide_welcome_desc1": "This tutorial will guide you to configure the extension in two steps.",
+    "guide_welcome_desc2": "Let's get started! First, move your cursor to the bottom right corner.",
+    "guide_login_title": "Auto Login",
+    "guide_login_desc1": "You have successfully opened the floating window! You can use all our features here.",
+    "guide_login_desc2": "Now, click ⚙️ in the floating window to enter the settings page and add your account.",
+    "guide_login_desc3": "After logging in, SuperEZ can help you auto-login to all HKU services. When 🤖 appears at the bottom right, auto-login is running.",
+    "guide_login_tip1": "📌 Rest assured, your account and password are saved in your browser. We cannot access any data.",
+    "guide_login_tip2": "📌 You can click the account again to delete it.",
+    "guide_moodle_title": "mO.odle",
+    "guide_moodle_desc1": "You have successfully added your HKU account! Click the blank area to close the popup.",
+    "guide_moodle_desc2": "Now, click the orange 📚 at the bottom right to go to Moodle.",
+    "guide_moodle_desc3": "SuperEZ will capture all courses for the current academic year. Select the courses you want to add in Available Courses.",
+    "guide_moodle_tip1": "📌 You can type e+Tab and enter the course code (fuzzy match) in the address bar for quick navigation.",
+    "guide_moodle_tip2": "📌 For more features, check our Github Wiki.",
+    "guide_next_btn": "Next"
+  }
