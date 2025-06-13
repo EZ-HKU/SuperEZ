@@ -82,19 +82,23 @@ window.popup.SetUserForm = function (custom, inner) {
     }
 
     let textInputStyle = {
-        border: "1px solid #ccc",
-        borderRadius: "3px",
-        boxShadow: "0 1px 1px rgba(0, 0, 0, 0.075) inset",
-        color: "#555",
+        // border: "1px solid #ccc",
+        // borderRadius: "3px",
+        // boxShadow: "0 1px 1px rgba(0, 0, 0, 0.075) inset",
+        // color: "#555",
         display: "block",
-        fontSize: "14px",
-        height: "34px",
+        // fontSize: "14px",
+        height: "40px",
         lineHeight: "1.42857",
         padding: "6px 12px",
-        transition: "border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s",
+        // transition: "border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s",
         width: "90%",
         margin: "auto",
         marginBottom: "10px",
+        border: "1px solid #e0e0e0",
+        borderRadius: "6px",
+        fontSize: "1rem",
+        background: "#f9f9f9",
     }
 
     return window.elements.Div(null, [
@@ -124,16 +128,27 @@ window.popup.SetUserForm = function (custom, inner) {
                     innerText: "Save",
                     style: {
                         width: "90%",
+                        // margin: "auto",
+                        // display: "block",
+                        // color: "white",
+                        // backgroundColor: "#007bff",
+                        // borderColor: "#007bff",
+                        // padding: "6px 12px",
+                        // fontSize: "14px",
+                        lineHeight: "1",
+                        // borderRadius: "3px",
+                        // cursor: "pointer",
+                        padding: "0.75rem",
                         margin: "auto",
-                        display: "block",
-                        color: "white",
-                        backgroundColor: "#007bff",
-                        borderColor: "#007bff",
-                        padding: "6px 12px",
-                        fontSize: "14px",
-                        lineHeight: "1.42857",
-                        borderRadius: "3px",
+                        border: "none",
+                        borderRadius: "6px",
+                        fontSize: "1rem",
                         cursor: "pointer",
+                        // background: "#3b82f6",
+                        border: "2px solid #3b82f6",
+                        color: "#3b82f6",
+                        background: "white",
+                        fontWeight: "600",
                     },
                 }),
             ]
@@ -146,16 +161,27 @@ function LogoutButton(custom, inner) {
         innerText: "Logout",
         style: {
             width: "90%",
+            // margin: "auto",
+            // display: "block",
+            // color: "white",
+            // backgroundColor: "#ff0000",
+            // borderColor: "#ff0000",
+            // padding: "6px 12px",
+            // fontSize: "14px",
+            lineHeight: "1",
+            // borderRadius: "3px",
+            // cursor: "pointer",
+            padding: "0.75rem",
             margin: "auto",
-            display: "block",
-            color: "white",
-            backgroundColor: "#ff0000",
-            borderColor: "#ff0000",
-            padding: "6px 12px",
-            fontSize: "14px",
-            lineHeight: "1.42857",
-            borderRadius: "3px",
+            // border: "none",
+            border: "2px solid #ef4444",
+            borderRadius: "6px",
+            fontSize: "1rem",
+            fontWeight: "600",
             cursor: "pointer",
+            // white background
+            background: "white",
+            color: "#ef4444",
         },
         onClick: async function () {
             await chrome.runtime.sendMessage({
@@ -169,7 +195,12 @@ function LogoutButton(custom, inner) {
 }
 
 async function ExamBaseButton(custom, inner) {
-    return window.elements.Div({}, [
+    return window.elements.Div({
+        style: {
+            textAlign: "left",
+            marginLeft: "15px",
+        },
+    }, [
         window.elements.Input(
             {
                 type: "checkbox",
@@ -177,8 +208,9 @@ async function ExamBaseButton(custom, inner) {
                 style: {
                     width: "20px",
                     height: "20px",
-                    marginRight: "10px",
-                    marginTop: "5px",
+                    // marginRight: "10px",
+                    // marginTop: "5px",
+                    verticalAlign: "middle",
                 },
                 checked: (await window.utils.getStorage('ExamBaseFly')).ExamBaseFly || false,
                 onClick: async function (e) {
@@ -194,9 +226,11 @@ async function ExamBaseButton(custom, inner) {
             htmlFor: "ez-exam-base-checkbox",
             innerText: "Skyrocketing Exam Base",
             style: {
-                fontSize: "16px",
-                fontWeight: "bold",
+                fontSize: "15px",
                 color: "#555555",
+                verticalAlign: "middle",
+                marginLeft: "10px",
+                marginBottom: "0",
             },
         }),
     ])
@@ -210,12 +244,18 @@ function SettingBlock(name, element) {
             margin: "10px 0",
         },
     }, [
-        window.elements.H3({
+        window.elements.H2({
             innerText: name,
             style: {
-                marginBottom: "10px",
-                fontSize: "20px",
-                fontWeight: "bold",
+                // marginBottom: "10px",
+                fontSize: "17px",
+                // fontWeight: "bold",
+                fontWeight: "500",
+                color: "#666",
+                marginBottom: "17px",
+                marginLeft: "15px",
+                height: "1.5rem",
+                textAlign: "left",
             },
         }),
         element,
