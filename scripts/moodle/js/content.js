@@ -428,9 +428,11 @@ function jumpToExamBase() {
         if (data.ExamBaseFly) {
             jumpTabFixed.style.opacity = "0";
             jumpTab.style.display = "block";
+            fly = true;
         } else {
             jumpTabFixed.style.opacity = "1";
             jumpTab.style.display = "none";
+            fly = false;
         }
     });
 }
