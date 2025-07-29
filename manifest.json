@@ -130,7 +130,8 @@
     {
       "resources": [
         "images/setting.svg",
-        "icons/*.png"
+        "icons/*.png", 
+        "images/noise.png"
       ],
       "matches": [
         "<all_urls>"
