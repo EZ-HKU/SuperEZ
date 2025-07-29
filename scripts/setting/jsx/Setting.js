@@ -236,6 +236,45 @@ async function ExamBaseButton(custom, inner) {
     ])
 }
 
+async function LiquidGlass(custom, inner) {
+    return window.elements.Div({
+        style: {
+            textAlign: "left",
+            marginLeft: "15px",
+        },
+    }, [
+        window.elements.Input(
+            {
+                type: "checkbox",
+                id: "ez-liquid-glass-checkbox",
+                style: {
+                    width: "20px",
+                    height: "20px",
+                    verticalAlign: "middle",
+                },
+                checked: (await window.utils.getStorage('LiquidGlass')).LiquidGlass || false,
+                onClick: async function (e) {
+                    let isChecked = e.target.checked;
+                    await chrome.storage.sync.set({
+                        LiquidGlass: isChecked,
+                    });
+                    
+                },
+            }, []
+        ),
+        window.elements.Label({
+            htmlFor: "ez-liquid-glass-checkbox",
+            innerText: "Liquid Glass",
+            style: {
+                fontSize: "15px",
+                color: "#555555",
+                verticalAlign: "middle",
+                marginLeft: "10px",
+                marginBottom: "0",
+            },
+        }),
+    ])
+}
 
 function SettingBlock(name, element) {
     return window.elements.Div({
@@ -276,6 +315,7 @@ window.popup.SettingPopup = async function SettingPopup(custom, inner) {
             SettingBlock("Set User", window.popup.SetUserForm()),
             SettingBlock("Quick Logout", LogoutButton()),
             SettingBlock("Exam Base", await ExamBaseButton()),
+            SettingBlock("UI", await LiquidGlass()),
         ]
         )
     )
