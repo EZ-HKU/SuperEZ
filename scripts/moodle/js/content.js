@@ -285,6 +285,7 @@ function jumpToExamBase() {
 
     const jumpTab = document.createElement("div");
     jumpTab.id = "jump-to-exam-base";
+    jumpTab.style.display = "none";
     jumpTab.style.position = "fixed";
     jumpTab.style.left = "50vw";
     jumpTab.style.top = "30vh";

@@ -2,10 +2,11 @@ function findPDFLinks() {
     let fileLinks = [];
     let links = document.getElementsByTagName('a');
     // filter links
-    links = Array.from(links).filter(link => link.href && link.href.includes('https://moodle.hku.hk/mod/resource/') && link.classList.contains('aalink'));
+    links = Array.from(links).filter(link => link.href && link.href.includes('https://moodle.hku.hk/mod/') && link.classList.contains('aalink'));
     for (let link of links) {
         if (link.href &&
-            link.href.includes('https://moodle.hku.hk/mod/resource/')) {
+            (link.href.includes('https://moodle.hku.hk/mod/resource/')||
+                link.href.includes('https://moodle.hku.hk/mod/folder/'))){
             let fileType = 'unknown';
             let iconSrc = '';
 
@@ -20,6 +21,8 @@ function findPDFLinks() {
                         const match = iconSrc.match(/\/f\/([^?]+)/);
                         if (match && match[1]) {
                             fileType = match[1].toLowerCase();
+                        } else {
+                            fileType = 'folder';
                         }
                     }
                 }
@@ -38,7 +41,7 @@ function findPDFLinks() {
 
 window.popup.SuperLoadPopup = async function () {
     let fileLinks = findPDFLinks();
-    let posibleFileTypes = ['pdf', 'file', 'powerpoint', 'spreadsheet', 'archive', 'document', 'video', 'image'];
+    let posibleFileTypes = ['pdf', 'file', 'powerpoint', 'spreadsheet', 'archive', 'document', 'video', 'image', 'folder'];
     let downloadedFileIDs = (await window.utils.getStorageLocal('downloadedFileIDs')).downloadedFileIDs || [];
     return (
         window.elements.Div({
