@@ -110,13 +110,22 @@
     "tabs",
     "activeTab",
     "cookies",
-    "downloads"
+    "downloads",
+    "webRequest",
+    "declarativeNetRequest"
   ],
   "host_permissions": [
     "https://hkuportal.hku.hk/*",
     "https://moodle.hku.hk/*",
     "https://booking.lib.hku.hk/*"
   ],
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "ruleset_1",
+      "enabled": true,
+      "path": "rules/moodle_pdf_download_rules.json"
+    }]
+  },
   "icons": {
     "16": "images/icon16.png",
     "32": "images/icon32.png",
