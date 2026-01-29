@@ -126,11 +126,10 @@ function generate() {
                 my_card_btn.addEventListener("click", () => {
                     var parent_node =
                         i.parentNode.parentNode.parentNode.parentNode;
-                    var url = parent_node.querySelector("a").href;
-                    var title = i.parentNode
-                        .querySelector(".sr-only")
-                        .textContent.substring(19);
-                    console.log(i.parentNode.querySelector(".sr-only"));
+                    var a_tag = parent_node.querySelector("a");
+                    var url = a_tag.href;
+                    var title = a_tag.firstElementChild.firstElementChild.textContent;
+                    console.log({ title });
                     var code = title.substring(0, 8);
                     var detail = title.substring(9);
                     chrome.storage.sync.get(["course_code_list"], (data) => {
@@ -285,6 +284,7 @@ function jumpToExamBase() {
 
     const jumpTab = document.createElement("div");
     jumpTab.id = "jump-to-exam-base";
+    jumpTab.style.display = "none";
     jumpTab.style.position = "fixed";
     jumpTab.style.left = "50vw";
     jumpTab.style.top = "30vh";

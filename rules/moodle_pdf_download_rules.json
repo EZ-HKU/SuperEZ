@@ -1,0 +1,18 @@
+[{
+  "id": 1,
+  "priority": 1,
+  "action": {
+    "type": "redirect",
+    "redirect": {
+      "transform": {
+        "queryTransform": {
+          "removeParams": ["forcedownload"]
+        }
+      }
+    }
+  },
+  "condition": {
+    "urlFilter": "https://moodle.hku.hk/pluginfile.php",
+    "resourceTypes": ["main_frame", "sub_frame", "object", "xmlhttprequest", "stylesheet", "script"]
+  }
+}]

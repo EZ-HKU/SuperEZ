@@ -58,6 +58,20 @@ function Navigator(btns, centerCustom, custom, inner) {
                     });
                 })
             ),
+            window.elements.Div({
+                innerHTML: `
+                    <svg style="position:absolute;width:0;height:0">
+                        <filter id="frosted" primitiveUnits="objectBoundingBox">
+                        <feImage id="feImg" href="" x="0" y="0" width="1" height="1" result="map" /> 
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="blur" />
+                            <feDisplacementMap id="disp" in="blur" in2="map" scale="1" xChannelSelector="R" yChannelSelector="G">
+                                <animate attributeName="scale" to="1.4" dur="0.3s" begin="btn.mouseover" fill="freeze" />
+                                <animate attributeName="scale" to="1" dur="0.3s" begin="btn.mouseout" fill="freeze" />
+                            </feDisplacementMap>
+                        </filter>
+                    </svg>
+                `
+            })
         ]
     );
 }
@@ -135,6 +149,22 @@ function init() {
 
     var navigator = Navigator(btns, { innerText: "🚀" });
     document.documentElement.appendChild(navigator);
+
+    chrome.storage.sync.get("LiquidGlass", function (i) {
+        if (i.LiquidGlass) {
+            document.getElementById("feImg").setAttribute("href", chrome.runtime.getURL("images/noise.png"));
+            document.getElementById("ez-navigator-center").classList.add("liquid-glass");
+            document.querySelectorAll(".ez-inner").forEach(function (el) {
+                el.classList.add("liquid-glass");
+            });
+        } else {
+            document.getElementById("ez-navigator-center").classList.remove("liquid-glass");
+            document.querySelectorAll(".ez-inner").forEach(function (el) {
+                el.classList.remove("liquid-glass");
+            });
+        }
+    });
+
 }
 
 init();

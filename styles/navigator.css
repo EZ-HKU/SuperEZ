@@ -98,3 +98,8 @@
     background-color: #e4eafa;
     color: #000000;
 }
+
+.liquid-glass {
+    backdrop-filter: url(#frosted) !important;
+    background: rgba(255, 255, 255, .08) !important;
+}
